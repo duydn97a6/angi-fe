@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AnGi – Group Decision</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --coral:#D85A30; --coral-light:#FAECE7; --coral-100:#F5C4B3;
+    --green-bg:#DCFCE7; --green-text:#15803D; --green-border:#86EFAC;
+    --red-bg:#FEE2E2; --red-text:#991B1B;
+    --amber-bg:#FEF3C7; --amber-text:#92400E;
+    --gray-50:#F9F9F7; --gray-100:#F1EFE8; --gray-200:#D3D1C7;
+    --gray-400:#888780; --gray-600:#5F5E5A; --gray-900:#1A1A19;
+    --blue-bg:#EFF6FF; --blue-text:#1D4ED8;
+    --radius:12px; --font:'Be Vietnam Pro',sans-serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:var(--font); background:#f0ede8; display:flex; gap:28px; padding:32px; justify-content:center; align-items:flex-start; min-height:100vh; flex-wrap:wrap; }
+
+  .col { display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .label { font-size:10px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--gray-400); }
+
+  .phone {
+    width:340px; background:#fff; border-radius:36px;
+    box-shadow:0 20px 56px rgba(0,0,0,.16);
+    overflow:hidden;
+  }
+  .status { display:flex; justify-content:space-between; padding:12px 18px 6px; font-size:11px; font-weight:700; }
+
+  /* header */
+  .g-header { padding:8px 16px 10px; display:flex; justify-content:space-between; align-items:flex-start; }
+  .g-title { font-size:14px; font-weight:700; color:var(--gray-900); }
+  .g-sub { font-size:10px; color:var(--gray-400); margin-top:2px; }
+  .timer { font-size:13px; font-weight:700; color:#DC2626; }
+
+  /* alert */
+  .alert { margin:0 12px 10px; background:var(--amber-bg); border-radius:8px; padding:7px 12px; font-size:10px; color:var(--amber-text); font-weight:600; }
+
+  /* section */
+  .sec-label { font-size:10px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; color:var(--gray-400); padding:0 14px; margin-bottom:7px; }
+
+  /* poll card */
+  .poll-cards { display:flex; flex-direction:column; gap:8px; padding:0 12px; }
+  .p-card { border:1.5px solid var(--gray-100); border-radius:var(--radius); padding:11px 13px; position:relative; }
+  .p-card.leading { border-color:var(--green-border); border-width:2px; background:#FAFFFE; }
+  .p-card.vetoed { opacity:.4; }
+  .lead-badge { position:absolute; top:-9px; right:10px; background:var(--green-bg); color:var(--green-text); font-size:9px; font-weight:700; padding:2px 8px; border-radius:8px; border:1px solid var(--green-border); }
+
+  .p-card-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
+  .p-name { font-size:12px; font-weight:700; color:var(--gray-900); }
+  .vote-count { font-size:12px; font-weight:700; color:var(--green-text); }
+  .veto-count { font-size:12px; font-weight:700; color:#DC2626; }
+  .p-meta { font-size:10px; color:var(--gray-400); margin-bottom:8px; }
+
+  .avatars { display:flex; gap:4px; margin-bottom:8px; }
+  .av { width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:8px; font-weight:700; }
+
+  .p-actions { display:flex; gap:7px; }
+  .p-btn { flex:1; border-radius:8px; padding:6px; font-size:10px; font-weight:600; font-family:var(--font); cursor:pointer; border:1.5px solid var(--gray-200); background:#fff; }
+  .p-btn.voted { background:var(--green-bg); border-color:var(--green-border); color:var(--green-text); }
+  .p-btn.veto-btn { color:#DC2626; }
+
+  /* vetoed section */
+  .vetoed-section { margin:10px 12px 0; background:var(--gray-50); border-radius:9px; padding:9px 12px; }
+  .vetoed-label { font-size:10px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; color:var(--gray-400); margin-bottom:5px; }
+  .vetoed-item { font-size:10px; color:var(--gray-400); padding:3px 0; display:flex; gap:6px; }
+  .vetoed-item::before { content:'🚫'; }
+
+  /* ai note */
+  .ai-note { margin:10px 12px; background:var(--blue-bg); border-radius:9px; padding:9px 12px; font-size:10px; color:var(--blue-text); line-height:1.5; }
+
+  /* CTA */
+  .cta-btn { margin:10px 12px 12px; background:var(--coral); color:#fff; border:none; border-radius:9px; padding:12px; font-size:12px; font-weight:700; font-family:var(--font); width:calc(100% - 24px); cursor:pointer; }
+
+  /* ── DESKTOP GROUP ── */
+  .browser {
+    width:860px; background:#fff; border-radius:16px;
+    box-shadow:0 20px 56px rgba(0,0,0,.16);
+    overflow:hidden;
+  }
+  .browser-chrome { background:#f5f5f3; padding:10px 16px; display:flex; align-items:center; gap:8px; border-bottom:1px solid #e0ddd5; }
+  .browser-dots { display:flex; gap:6px; }
+  .dot { width:10px; height:10px; border-radius:50%; }
+  .dot.r{background:#ff5f57;} .dot.y{background:#febc2e;} .dot.g{background:#28c840;}
+  .url-bar { flex:1; background:#fff; border-radius:6px; padding:4px 12px; font-size:11px; color:var(--gray-400); border:1px solid var(--gray-200); }
+
+  .d-nav { display:flex; justify-content:space-between; align-items:center; padding:0 24px; height:50px; border-bottom:1px solid var(--gray-100); }
+  .d-logo { font-size:15px; font-weight:700; }
+  .d-links { display:flex; gap:20px; font-size:12px; color:var(--gray-400); }
+  .d-links .act { color:var(--coral); font-weight:700; }
+  .d-timer { font-size:12px; font-weight:700; color:#DC2626; }
+
+  .d-body { padding:20px 24px; }
+  .d-page-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; }
+  .d-page-title { font-size:17px; font-weight:700; }
+  .d-page-sub { font-size:11px; color:var(--gray-400); margin-top:3px; }
+  .member-stack { display:flex; }
+  .m-av { width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; border:2px solid white; margin-left:-6px; }
+  .m-av:first-child { margin-left:0; }
+
+  .d-ai-note { background:var(--blue-bg); border-radius:9px; padding:10px 14px; font-size:11px; color:var(--blue-text); margin-bottom:14px; line-height:1.5; }
+
+  .d-cards { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:14px; }
+  .d-p-card { border:1.5px solid var(--gray-100); border-radius:var(--radius); padding:13px; position:relative; }
+  .d-p-card.leading { border-color:var(--green-border); border-width:2px; }
+
+  .d-vetoed-row { background:var(--gray-50); border-radius:9px; padding:10px 14px; margin-bottom:14px; }
+  .d-vetoed-label { font-size:10px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; color:var(--gray-400); margin-bottom:5px; }
+  .d-vetoed-items { display:flex; gap:20px; font-size:11px; color:var(--gray-400); }
+
+  .d-cta-row { display:flex; gap:10px; align-items:center; }
+  .d-btn { background:var(--gray-50); border:1.5px solid var(--gray-200); border-radius:9px; padding:9px 14px; font-size:11px; font-weight:600; font-family:var(--font); cursor:pointer; color:var(--gray-600); }
+  .d-cta { background:var(--coral); color:#fff; border:none; border-radius:9px; padding:9px 18px; font-size:12px; font-weight:700; font-family:var(--font); cursor:pointer; margin-left:auto; }
+</style>
+</head>
+<body>
+
+<!-- MOBILE GROUP -->
+<div class="col">
+  <div class="label">Group Decision – Mobile</div>
+  <div class="phone">
+    <div class="status"><span>11:45</span><span>⏱ 2:45</span></div>
+
+    <div class="g-header">
+      <div>
+        <div class="g-title">Team Dev Backend</div>
+        <div class="g-sub">5 người · Đang vote</div>
+      </div>
+      <div class="timer">⏱ 2:45</div>
+    </div>
+
+    <div class="alert">⚠ 2 người chưa vote: An, Linh</div>
+
+    <div class="sec-label">AI lọc cho cả nhóm</div>
+
+    <div class="poll-cards">
+      <div class="p-card">
+        <div class="p-card-top">
+          <div class="p-name">Bún bò Huế Cô Ba</div>
+          <div class="vote-count">3 👍</div>
+        </div>
+        <div class="p-meta">55.000đ · 400m · ⭐ 4.7</div>
+        <div class="avatars">
+          <div class="av" style="background:#CECBF6;color:#3C3489">H</div>
+          <div class="av" style="background:#F5C4B3;color:#712B13">T</div>
+          <div class="av" style="background:#9FE1CB;color:#085041">M</div>
+        </div>
+        <div class="p-actions">
+          <button class="p-btn">👍 Vote</button>
+          <button class="p-btn veto-btn">🚫 Veto</button>
+        </div>
+      </div>
+
+      <div class="p-card leading">
+        <div class="lead-badge">🏆 Đang dẫn</div>
+        <div class="p-card-top">
+          <div class="p-name">Cơm gà Hải Nam</div>
+          <div class="vote-count">4 👍</div>
+        </div>
+        <div class="p-meta">60.000đ · 250m · ⭐ 4.8</div>
+        <div class="avatars">
+          <div class="av" style="background:#CECBF6;color:#3C3489">H</div>
+          <div class="av" style="background:#F5C4B3;color:#712B13">T</div>
+          <div class="av" style="background:#9FE1CB;color:#085041">M</div>
+          <div class="av" style="background:#F4C0D1;color:#72243E">D</div>
+        </div>
+        <div class="p-actions">
+          <button class="p-btn voted">✓ Đã vote</button>
+          <button class="p-btn veto-btn">🚫 Veto</button>
+        </div>
+      </div>
+
+      <div class="p-card vetoed">
+        <div class="p-card-top">
+          <div class="p-name" style="text-decoration:line-through">Lẩu thái Tomyum</div>
+          <div class="veto-count">🚫 Veto</div>
+        </div>
+        <div class="p-meta" style="font-size:10px;color:#DC2626">Hoa bị dị ứng hải sản</div>
+      </div>
+    </div>
+
+    <div class="ai-note">💡 Tuần này đã chiều An 2 lần, hôm nay AI ưu tiên theo Mai</div>
+
+    <button class="cta-btn">Chốt ngay: Cơm gà Hải Nam →</button>
+  </div>
+</div>
+
+<!-- DESKTOP GROUP -->
+<div class="col">
+  <div class="label">Group Decision – Desktop</div>
+  <div class="browser">
+    <div class="browser-chrome">
+      <div class="browser-dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+      <div class="url-bar">🔒 angi.vn/groups/team-dev</div>
+      <div class="d-timer">⏱ Còn 2:45 để vote</div>
+    </div>
+
+    <div class="d-nav">
+      <div style="display:flex;align-items:center;gap:20px">
+        <span class="d-logo">🍜 AnGi</span>
+        <div class="d-links"><span>Home</span><span class="act">Nhóm</span><span>Lịch sử</span></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:11px;color:var(--gray-400)">🌤 32°C</span>
+        <div class="av" style="background:var(--coral-light);color:var(--coral);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">M</div>
+      </div>
+    </div>
+
+    <div class="d-body">
+      <div class="d-page-header">
+        <div>
+          <div class="d-page-title">Team Dev Backend · Trưa thứ 5</div>
+          <div class="d-page-sub">Huy tạo · 5 thành viên · Đóng lúc 11:30</div>
+        </div>
+        <div class="member-stack">
+          <div class="m-av" style="background:#CECBF6;color:#3C3489">H</div>
+          <div class="m-av" style="background:#F5C4B3;color:#712B13">T</div>
+          <div class="m-av" style="background:#9FE1CB;color:#085041">M</div>
+          <div class="m-av" style="background:#F4C0D1;color:#72243E">D</div>
+          <div class="m-av" style="background:#D3D1C7;color:#2C2C2A">L</div>
+        </div>
+      </div>
+
+      <div class="d-ai-note">💡 AI đã loại 5 món vì có người trong nhóm dị ứng. Tuần này nhóm đã chiều ý An 2 lần, hôm nay ưu tiên khẩu vị của Mai.</div>
+
+      <div class="d-cards">
+        <div class="d-p-card">
+          <div class="p-card-top" style="margin-bottom:5px">
+            <div class="p-name">Bún bò Huế Cô Ba</div>
+            <div class="vote-count">3 👍</div>
+          </div>
+          <div class="p-meta">55.000đ · 400m · ⭐ 4.7</div>
+          <div class="avatars" style="margin-bottom:9px">
+            <div class="av" style="background:#CECBF6;color:#3C3489;width:20px;height:20px;font-size:8px">H</div>
+            <div class="av" style="background:#F5C4B3;color:#712B13;width:20px;height:20px;font-size:8px">T</div>
+            <div class="av" style="background:#9FE1CB;color:#085041;width:20px;height:20px;font-size:8px">M</div>
+          </div>
+          <div class="p-actions">
+            <button class="p-btn" style="font-size:10px;padding:5px">👍 Vote</button>
+            <button class="p-btn veto-btn" style="font-size:10px;padding:5px">🚫 Veto</button>
+          </div>
+        </div>
+
+        <div class="d-p-card leading">
+          <div class="lead-badge">🏆 Đang dẫn</div>
+          <div class="p-card-top" style="margin-bottom:5px">
+            <div class="p-name">Cơm gà Hải Nam</div>
+            <div class="vote-count">4 👍</div>
+          </div>
+          <div class="p-meta">60.000đ · 250m · ⭐ 4.8</div>
+          <div class="avatars" style="margin-bottom:9px">
+            <div class="av" style="background:#CECBF6;color:#3C3489;width:20px;height:20px;font-size:8px">H</div>
+            <div class="av" style="background:#F5C4B3;color:#712B13;width:20px;height:20px;font-size:8px">T</div>
+            <div class="av" style="background:#9FE1CB;color:#085041;width:20px;height:20px;font-size:8px">M</div>
+            <div class="av" style="background:#F4C0D1;color:#72243E;width:20px;height:20px;font-size:8px">D</div>
+          </div>
+          <div class="p-actions">
+            <button class="p-btn voted" style="font-size:10px;padding:5px">✓ Đã vote</button>
+            <button class="p-btn veto-btn" style="font-size:10px;padding:5px">🚫 Veto</button>
+          </div>
+        </div>
+
+        <div class="d-p-card">
+          <div class="p-card-top" style="margin-bottom:5px">
+            <div class="p-name">Phở gà Hương Bình</div>
+            <div style="font-size:11px;color:var(--gray-400);font-weight:600">1 👍</div>
+          </div>
+          <div class="p-meta">50.000đ · 500m · ⭐ 4.5</div>
+          <div class="avatars" style="margin-bottom:9px">
+            <div class="av" style="background:#F5C4B3;color:#712B13;width:20px;height:20px;font-size:8px">T</div>
+          </div>
+          <div class="p-actions">
+            <button class="p-btn" style="font-size:10px;padding:5px">👍 Vote</button>
+            <button class="p-btn veto-btn" style="font-size:10px;padding:5px">🚫 Veto</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-vetoed-row">
+        <div class="d-vetoed-label">🚫 Đã loại bởi veto</div>
+        <div class="d-vetoed-items">
+          <span>Lẩu Thái (Hoa dị ứng hải sản)</span>
+          <span>Bún đậu (Mai đang giảm cân)</span>
+        </div>
+      </div>
+
+      <div class="d-cta-row">
+        <button class="d-btn">+ Thêm món khác</button>
+        <button class="d-btn">🔄 AI tạo mới</button>
+        <button class="d-cta">Chốt ngay: Cơm gà Hải Nam →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

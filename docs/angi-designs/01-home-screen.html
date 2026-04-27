@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AnGi – Home Screen</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --coral: #D85A30;
+    --coral-light: #FAECE7;
+    --coral-dark: #993C1D;
+    --green-bg: #EAF3DE; --green-text: #27500A;
+    --purple-bg: #EEEDFE; --purple-text: #3C3489;
+    --amber-bg: #FAEEDA; --amber-text: #633806;
+    --gray-50: #F9F9F7; --gray-100: #F1EFE8;
+    --gray-200: #D3D1C7; --gray-400: #888780;
+    --gray-600: #5F5E5A; --gray-900: #1A1A19;
+    --blue-bg: #EFF6FF; --blue-text: #1E40AF;
+    --radius: 12px;
+    --font: 'Be Vietnam Pro', sans-serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: var(--font); background: #f0ede8; display:flex; gap:32px; padding:32px; align-items:flex-start; justify-content:center; min-height:100vh; }
+
+  /* ── LABELS ── */
+  .label { text-align:center; font-size:11px; font-weight:600; color:var(--gray-400); letter-spacing:.8px; text-transform:uppercase; margin-bottom:10px; }
+
+  /* ══════ MOBILE ══════ */
+  .mobile-wrap { display:flex; flex-direction:column; align-items:center; }
+  .phone {
+    width:375px; background:#fff; border-radius:36px;
+    box-shadow: 0 24px 64px rgba(0,0,0,.18), 0 4px 12px rgba(0,0,0,.08);
+    overflow:hidden; position:relative;
+  }
+  /* status bar */
+  .status-bar { display:flex; justify-content:space-between; align-items:center; padding:12px 20px 6px; font-size:11px; font-weight:600; }
+  .status-bar .time { font-size:14px; font-weight:700; }
+  .status-icons { display:flex; gap:6px; align-items:center; font-size:12px; }
+
+  /* top bar */
+  .top-bar { display:flex; justify-content:space-between; align-items:center; padding:6px 16px 10px; }
+  .greeting-sub { font-size:11px; color:var(--gray-400); }
+  .greeting-main { font-size:15px; font-weight:600; color:var(--gray-900); }
+  .avatar { width:34px; height:34px; border-radius:50%; background:var(--coral-light); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:var(--coral); }
+
+  /* context bar */
+  .ctx-bar { margin:0 12px 12px; background:var(--blue-bg); border-radius:10px; padding:7px 12px; font-size:11px; color:var(--blue-text); display:flex; gap:10px; align-items:center; }
+  .ctx-bar span { color:var(--blue-text); opacity:.6; }
+
+  /* section label */
+  .sec-label { font-size:10px; font-weight:600; letter-spacing:.8px; text-transform:uppercase; color:var(--gray-400); padding:0 14px; margin-bottom:8px; }
+
+  /* card list */
+  .cards { display:flex; flex-direction:column; gap:8px; padding:0 12px; }
+
+  .rec-card {
+    background:#fff; border:1.5px solid var(--gray-100);
+    border-radius:var(--radius); padding:12px 14px;
+    cursor:pointer; transition:transform .15s, box-shadow .15s;
+    position:relative;
+  }
+  .rec-card:active { transform:scale(.98); }
+  .rec-card.featured { border-color:var(--coral); border-width:2px; }
+  .ai-badge {
+    position:absolute; top:-9px; left:12px;
+    background:var(--coral); color:#fff;
+    font-size:9px; font-weight:700; padding:2px 8px; border-radius:8px;
+    letter-spacing:.3px;
+  }
+  .tag { display:inline-flex; align-items:center; font-size:10px; font-weight:600; padding:2px 10px; border-radius:20px; margin-bottom:7px; }
+  .tag.safe { background:var(--green-bg); color:var(--green-text); }
+  .tag.familiar { background:var(--purple-bg); color:var(--purple-text); }
+  .tag.discovery { background:var(--amber-bg); color:var(--amber-text); }
+
+  .card-name { font-size:13px; font-weight:600; color:var(--gray-900); margin-bottom:3px; }
+  .card-sub { font-size:11px; color:var(--gray-600); margin-bottom:7px; }
+  .card-meta { display:flex; gap:10px; font-size:10px; color:var(--gray-400); }
+  .card-why { margin-top:9px; padding-top:9px; border-top:1px solid var(--gray-100); font-size:10px; color:var(--gray-600); display:flex; gap:5px; }
+
+  /* action buttons */
+  .actions { display:flex; gap:8px; padding:12px; }
+  .btn { flex:1; border:none; border-radius:9px; padding:10px 8px; font-size:12px; font-weight:600; font-family:var(--font); cursor:pointer; display:flex; align-items:center; justify-content:center; gap:5px; }
+  .btn-sec { background:var(--gray-50); color:var(--gray-600); border:1.5px solid var(--gray-200); }
+  .btn-pri { background:var(--coral-light); color:var(--coral); border:1.5px solid #f5c4b3; }
+
+  /* stats */
+  .stats { margin:0 12px 12px; background:var(--gray-50); border-radius:10px; padding:10px 12px; }
+  .stats-label { font-size:10px; font-weight:600; letter-spacing:.6px; text-transform:uppercase; color:var(--gray-400); margin-bottom:6px; }
+  .stats-row { display:flex; gap:14px; font-size:11px; color:var(--gray-600); flex-wrap:wrap; }
+  .stats-warn { color:#b45309; font-weight:600; }
+
+  /* bottom nav */
+  .bottom-nav { display:flex; border-top:1px solid var(--gray-100); padding:8px 0 14px; }
+  .nav-item { flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; font-size:10px; color:var(--gray-400); cursor:pointer; }
+  .nav-item.active { color:var(--coral); }
+  .nav-icon { font-size:18px; }
+
+  /* ══════ DESKTOP ══════ */
+  .desktop-wrap { display:flex; flex-direction:column; align-items:center; }
+  .browser {
+    width:900px; background:#fff; border-radius:16px;
+    box-shadow: 0 24px 64px rgba(0,0,0,.18);
+    overflow:hidden;
+  }
+  .browser-chrome { background:#f5f5f3; padding:10px 16px; display:flex; align-items:center; gap:8px; border-bottom:1px solid #e0ddd5; }
+  .browser-dots { display:flex; gap:6px; }
+  .dot { width:10px; height:10px; border-radius:50%; }
+  .dot.red{background:#ff5f57;} .dot.yellow{background:#febc2e;} .dot.green{background:#28c840;}
+  .url-bar { flex:1; background:#fff; border-radius:6px; padding:4px 12px; font-size:11px; color:var(--gray-400); border:1px solid var(--gray-200); }
+
+  /* desktop nav */
+  .d-nav { display:flex; justify-content:space-between; align-items:center; padding:0 28px; height:52px; border-bottom:1px solid var(--gray-100); }
+  .d-logo { font-size:16px; font-weight:700; color:var(--gray-900); }
+  .d-links { display:flex; gap:22px; font-size:13px; }
+  .d-links a { color:var(--gray-400); text-decoration:none; font-weight:500; cursor:pointer; }
+  .d-links a.active { color:var(--coral); }
+  .d-right { display:flex; align-items:center; gap:12px; font-size:11px; color:var(--gray-400); }
+  .d-avatar { width:30px; height:30px; border-radius:50%; background:var(--coral-light); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:var(--coral); }
+
+  /* desktop content */
+  .d-body { padding:24px 28px; }
+  .d-title { font-size:20px; font-weight:700; color:var(--gray-900); margin-bottom:3px; }
+  .d-sub { font-size:12px; color:var(--gray-400); margin-bottom:18px; }
+
+  /* desktop cards grid */
+  .d-cards { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-bottom:16px; }
+  .d-card {
+    border:1.5px solid var(--gray-100); border-radius:var(--radius);
+    padding:14px; cursor:pointer; transition:box-shadow .15s;
+    position:relative;
+  }
+  .d-card:hover { box-shadow:0 4px 16px rgba(0,0,0,.08); }
+  .d-card.featured { border-color:var(--coral); border-width:2px; }
+
+  /* desktop action row */
+  .d-actions { display:flex; gap:10px; margin-bottom:18px; }
+  .d-btn { background:var(--gray-50); border:1.5px solid var(--gray-200); border-radius:9px; padding:9px 16px; font-size:12px; font-weight:600; font-family:var(--font); cursor:pointer; display:flex; align-items:center; gap:6px; color:var(--gray-600); }
+  .d-btn-pri { background:var(--coral-light); border-color:#f5c4b3; color:var(--coral); margin-left:auto; }
+
+  /* desktop stats */
+  .d-stats { background:var(--gray-50); border-radius:10px; padding:12px 16px; }
+  .d-stats-label { font-size:10px; font-weight:600; letter-spacing:.6px; text-transform:uppercase; color:var(--gray-400); margin-bottom:7px; }
+  .d-stats-row { display:flex; gap:18px; font-size:12px; color:var(--gray-600); }
+</style>
+</head>
+<body>
+
+<!-- ── MOBILE ── -->
+<div class="mobile-wrap">
+  <div class="label">📱 Mobile App (375px)</div>
+  <div class="phone">
+    <div class="status-bar">
+      <div class="time">11:45</div>
+      <div class="status-icons">📶 🔋</div>
+    </div>
+
+    <div class="top-bar">
+      <div>
+        <div class="greeting-sub">Chào Minh 👋</div>
+        <div class="greeting-main">Trưa nay ăn gì?</div>
+      </div>
+      <div class="avatar">M</div>
+    </div>
+
+    <div class="ctx-bar">
+      <span>🌤 32°C</span>
+      <span>•</span>
+      <span>Q.1, HCM</span>
+      <span>•</span>
+      <span>11:45</span>
+    </div>
+
+    <div class="sec-label">3 gợi ý cho bạn</div>
+
+    <div class="cards">
+      <div class="rec-card">
+        <div class="tag safe">An toàn</div>
+        <div class="card-name">Bún chả Hương Liên</div>
+        <div class="card-sub">Bún chả · 45.000đ</div>
+        <div class="card-meta">
+          <span>📍 350m</span><span>⭐ 4.6</span><span>🛵 15 phút</span>
+        </div>
+        <div class="card-why"><span>💡</span><span>Bạn đã ăn 3 lần, đánh giá rất tích cực</span></div>
+      </div>
+
+      <div class="rec-card featured">
+        <div class="ai-badge">✦ AI đề xuất #1</div>
+        <div class="tag familiar">Quen thuộc</div>
+        <div class="card-name">Cơm tấm Ba Ghiền</div>
+        <div class="card-sub">Cơm tấm · 55.000đ</div>
+        <div class="card-meta">
+          <span>📍 500m</span><span>⭐ 4.8</span><span>🛵 20 phút</span>
+        </div>
+        <div class="card-why"><span>💡</span><span>Phù hợp trời nóng, đủ đạm cho chiều làm việc</span></div>
+      </div>
+
+      <div class="rec-card">
+        <div class="tag discovery">Khám phá</div>
+        <div class="card-name">Gỏi cuốn Mai Xuân</div>
+        <div class="card-sub">Gỏi cuốn · 40.000đ</div>
+        <div class="card-meta">
+          <span>📍 700m</span><span>⭐ 4.5</span><span>🛵 25 phút</span>
+        </div>
+        <div class="card-why"><span>💡</span><span>Món mới, nhẹ bụng, hợp người giống bạn</span></div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-sec">🔄 Gợi ý khác</button>
+      <button class="btn btn-pri">👥 Rủ nhóm</button>
+    </div>
+
+    <div class="stats">
+      <div class="stats-label">Tuần này bạn đã ăn</div>
+      <div class="stats-row">
+        <span>🍜 Phở (2)</span>
+        <span>🍚 Cơm (3)</span>
+        <span>🥗 Salad (1)</span>
+        <span class="stats-warn">⚠ Nhiều dầu mỡ 60%</span>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="nav-item active"><div class="nav-icon">🏠</div>Home</div>
+      <div class="nav-item"><div class="nav-icon">👥</div>Nhóm</div>
+      <div class="nav-item"><div class="nav-icon">📊</div>Lịch sử</div>
+      <div class="nav-item"><div class="nav-icon">👤</div>Cá nhân</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── DESKTOP ── -->
+<div class="desktop-wrap">
+  <div class="label">🖥 Web App (Desktop)</div>
+  <div class="browser">
+    <div class="browser-chrome">
+      <div class="browser-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+      <div class="url-bar">🔒 angi.vn/home</div>
+    </div>
+
+    <div class="d-nav">
+      <div style="display:flex;align-items:center;gap:24px">
+        <div class="d-logo">🍜 AnGi</div>
+        <div class="d-links">
+          <a class="active">Home</a>
+          <a>Nhóm</a>
+          <a>Lịch sử</a>
+          <a>Khám phá</a>
+        </div>
+      </div>
+      <div class="d-right">
+        <span>🌤 32°C · Q.1</span>
+        <span>🔔</span>
+        <div class="d-avatar">M</div>
+      </div>
+    </div>
+
+    <div class="d-body">
+      <div class="d-title">Chào Minh, trưa nay ăn gì? 👋</div>
+      <div class="d-sub">AI đã phân tích thời tiết, vị trí và khẩu vị của bạn</div>
+
+      <div class="d-cards">
+        <div class="d-card">
+          <div class="tag safe">An toàn</div>
+          <div class="card-name">Bún chả Hương Liên</div>
+          <div class="card-sub">Bún chả · 45.000đ</div>
+          <div class="card-meta" style="margin-bottom:8px"><span>📍 350m</span><span>⭐ 4.6</span><span>🛵 15p</span></div>
+          <div class="card-why"><span>💡</span><span>Bạn ăn 3 lần, đánh giá rất tích cực</span></div>
+        </div>
+
+        <div class="d-card featured">
+          <div class="ai-badge">✦ AI đề xuất #1</div>
+          <div class="tag familiar">Quen thuộc</div>
+          <div class="card-name">Cơm tấm Ba Ghiền</div>
+          <div class="card-sub">Cơm tấm · 55.000đ</div>
+          <div class="card-meta" style="margin-bottom:8px"><span>📍 500m</span><span>⭐ 4.8</span><span>🛵 20p</span></div>
+          <div class="card-why"><span>💡</span><span>Phù hợp trời nóng, đủ đạm cho chiều</span></div>
+        </div>
+
+        <div class="d-card">
+          <div class="tag discovery">Khám phá</div>
+          <div class="card-name">Gỏi cuốn Mai Xuân</div>
+          <div class="card-sub">Gỏi cuốn · 40.000đ</div>
+          <div class="card-meta" style="margin-bottom:8px"><span>📍 700m</span><span>⭐ 4.5</span><span>🛵 25p</span></div>
+          <div class="card-why"><span>💡</span><span>Món mới, nhẹ bụng, hợp người giống bạn</span></div>
+        </div>
+      </div>
+
+      <div class="d-actions">
+        <button class="d-btn">🔄 Gợi ý khác</button>
+        <button class="d-btn">🚫 Không muốn ăn...</button>
+        <button class="d-btn d-btn-pri">👥 Rủ cả nhóm cùng quyết →</button>
+      </div>
+
+      <div class="d-stats">
+        <div class="d-stats-label">Tuần này bạn đã ăn</div>
+        <div class="d-stats-row">
+          <span>🍜 Phở (2)</span>
+          <span>🍚 Cơm (3)</span>
+          <span>🥗 Salad (1)</span>
+          <span style="color:#b45309;font-weight:600">⚠ Nhiều dầu mỡ 60%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AnGi – Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --coral:#D85A30;--coral-50:#FAECE7;--coral-100:#F5C4B3;--coral-600:#993C1D;--coral-800:#712B13;
+    --green-50:#EAF3DE;--green-800:#27500A;
+    --purple-50:#EEEDFE;--purple-800:#3C3489;
+    --amber-50:#FAEEDA;--amber-800:#633806;
+    --gray-50:#F9F9F7;--gray-100:#F1EFE8;--gray-200:#D3D1C7;
+    --gray-400:#888780;--gray-600:#5F5E5A;--gray-800:#2C2C2A;--gray-900:#1A1A19;
+    --font:'Be Vietnam Pro',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:var(--font);background:#f0ede8;padding:40px;color:var(--gray-900);}
+  h1{font-size:28px;font-weight:700;margin-bottom:4px;}
+  .sub{font-size:14px;color:var(--gray-400);margin-bottom:40px;}
+
+  .section{background:#fff;border-radius:16px;padding:28px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,.06);}
+  .sec-title{font-size:11px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:var(--gray-400);margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--gray-100);}
+
+  /* COLORS */
+  .color-grid{display:flex;flex-wrap:wrap;gap:12px;}
+  .swatch{border-radius:10px;overflow:hidden;width:120px;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+  .swatch-block{height:60px;}
+  .swatch-info{background:#fff;padding:8px 10px;}
+  .swatch-name{font-size:11px;font-weight:700;color:var(--gray-800);}
+  .swatch-hex{font-size:10px;color:var(--gray-400);font-family:monospace;}
+
+  /* TYPOGRAPHY */
+  .type-row{display:flex;align-items:baseline;gap:20px;padding:10px 0;border-bottom:1px solid var(--gray-50);}
+  .type-row:last-child{border-bottom:none;}
+  .type-label{font-size:10px;color:var(--gray-400);width:80px;flex-shrink:0;}
+  .type-spec{font-size:10px;color:var(--gray-400);margin-left:auto;font-family:monospace;}
+
+  /* TAGS */
+  .tag{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:3px 12px;border-radius:20px;margin-right:8px;}
+  .tag.safe{background:var(--green-50);color:var(--green-800);}
+  .tag.familiar{background:var(--purple-50);color:var(--purple-800);}
+  .tag.discovery{background:var(--amber-50);color:var(--amber-800);}
+
+  /* BUTTONS */
+  .btn-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+  .btn{border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:600;font-family:var(--font);cursor:pointer;}
+  .btn-pri{background:var(--coral);color:#fff;}
+  .btn-sec{background:#fff;color:var(--coral);border:1.5px solid var(--coral-100);}
+  .btn-ghost{background:transparent;color:var(--gray-600);border:1.5px solid var(--gray-200);}
+  .btn-sm{padding:7px 14px;font-size:11px;}
+  .btn-lg{padding:13px 28px;font-size:14px;}
+
+  /* CARDS */
+  .card-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .demo-card{border:1.5px solid var(--gray-100);border-radius:12px;padding:14px;}
+  .demo-card.featured{border-color:var(--coral);border-width:2px;}
+
+  /* SPACING */
+  .space-row{display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap;}
+  .space-block{background:var(--coral-50);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:4px;}
+  .space-label{font-size:9px;color:var(--gray-400);text-align:center;margin-top:4px;}
+
+  /* RADIUS */
+  .radius-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+  .radius-demo{width:60px;height:60px;background:var(--coral-50);border:2px solid var(--coral-100);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--coral-600);}
+
+  /* AVATARS */
+  .av-row{display:flex;gap:10px;align-items:center;}
+  .av{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;}
+
+  /* INPUT */
+  .demo-input{display:flex;flex-direction:column;gap:4px;width:280px;}
+  .demo-input label{font-size:12px;font-weight:600;color:var(--gray-600);}
+  .demo-input input{height:44px;border-radius:8px;border:1.5px solid var(--gray-200);padding:0 14px;font-size:14px;font-family:var(--font);outline:none;}
+  .demo-input input:focus{border-color:var(--coral);box-shadow:0 0 0 3px var(--coral-50);}
+  .demo-input input.error{border-color:#EF4444;}
+  .err-msg{font-size:11px;color:#EF4444;}
+</style>
+</head>
+<body>
+
+<h1>🍜 AnGi Design System</h1>
+<p class="sub">Tài liệu tham chiếu màu sắc, typography, spacing và components — dùng khi code</p>
+
+<!-- COLORS -->
+<div class="section">
+  <div class="sec-title">Color Palette</div>
+  <div class="color-grid">
+    <div class="swatch"><div class="swatch-block" style="background:#FAECE7"></div><div class="swatch-info"><div class="swatch-name">Coral 50</div><div class="swatch-hex">#FAECE7</div></div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#F5C4B3"></div><div class="swatch-info"><div class="swatch-name">Coral 100</div><div class="swatch-hex">#F5C4B3</div></div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#D85A30"></div><div class="swatch-info"><div class="swatch-name">Coral 400 ★</div><div class="swatch-hex">#D85A30</div></div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#993C1D"></div><div class="swatch-info"><div class="swatch-name">Coral 600</div><div class="swatch-hex">#993C1D</div></div></div>
+
+    <div class="swatch"><div class="swatch-block" style="background:#EAF3DE"></div><div class="swatch-info"><div class="swatch-name">Green 50</div><div class="swatch-hex">#EAF3DE</div></div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#639922"></div><div class="swatch-info"><div class="swatch-name">Green 400</div><div class="swatch-hex">#639922</div></div></div>
+
+    <div class="swatch"><div class="swatch-block" style="background:#EEEDFE"></div><div class="swatch-info"><div class="swatch-name">Purple 50</div><div class="swatch-hex">#EEEDFE</div></div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#7F77DD"></div><div class="swatch-info"><div class="swatch-name">Purple 400</div><div class="swatch-hex">#7F77DD</div></div></div>
+
+    <div class="swatch"><div class="swatch-block" style="background:#FAEEDA"></div><div class="swatch-info"><div class="swatch-name">Amber 50</div><div class="swatch-hex">#FAEEDA</div></div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#BA7517"></div><div class="swatch-info"><div class="swatch-name">Amber 400</div><div class="swatch-hex">#BA7517</div></div></div>
+
+    <div class="swatch"><div class="swatch-block" style="background:#F9F9F7"></div><div class="swatch-info"><div class="swatch-name">Gray 50</div><div class="swatch-hex">#F9F9F7</div></div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#888780"></div><div class="swatch-info"><div class="swatch-name">Gray 400</div><div class="swatch-hex">#888780</div></div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#2C2C2A"></div><div class="swatch-info"><div class="swatch-name">Gray 800</div><div class="swatch-hex">#2C2C2A</div></div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#1A1A19"></div><div class="swatch-info"><div class="swatch-name">Gray 900</div><div class="swatch-hex">#1A1A19</div></div></div>
+  </div>
+</div>
+
+<!-- TYPOGRAPHY -->
+<div class="section">
+  <div class="sec-title">Typography — Be Vietnam Pro</div>
+  <div class="type-row"><div class="type-label">Display</div><div style="font-size:32px;font-weight:700;line-height:1.2">Trưa nay ăn gì?</div><div class="type-spec">32px / 700</div></div>
+  <div class="type-row"><div class="type-label">H1</div><div style="font-size:24px;font-weight:600">Chào Minh, trưa nay ăn gì? 👋</div><div class="type-spec">24px / 600</div></div>
+  <div class="type-row"><div class="type-label">H2</div><div style="font-size:20px;font-weight:500">Cơm tấm Ba Ghiền</div><div class="type-spec">20px / 500</div></div>
+  <div class="type-row"><div class="type-label">H3</div><div style="font-size:18px;font-weight:500">Bún chả Hương Liên</div><div class="type-spec">18px / 500</div></div>
+  <div class="type-row"><div class="type-label">Body Large</div><div style="font-size:16px;font-weight:400">AI đã phân tích thời tiết, vị trí và khẩu vị của bạn</div><div class="type-spec">16px / 400</div></div>
+  <div class="type-row"><div class="type-label">Body</div><div style="font-size:14px;font-weight:400;color:var(--gray-600)">Feedback giúp AI hiểu bạn hơn mỗi ngày</div><div class="type-spec">14px / 400</div></div>
+  <div class="type-row"><div class="type-label">Body Small</div><div style="font-size:12px;font-weight:400;color:var(--gray-400)">Ăn lúc 12:15 hôm nay · 45.000đ · 350m</div><div class="type-spec">12px / 400</div></div>
+  <div class="type-row"><div class="type-label">Caption</div><div style="font-size:11px;font-weight:400;color:var(--gray-400)">3 GỢI Ý CHO BẠN · TUẦN NÀY</div><div class="type-spec">11px / 400</div></div>
+</div>
+
+<!-- CATEGORY TAGS -->
+<div class="section">
+  <div class="sec-title">Category Tags</div>
+  <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+    <span class="tag safe">An toàn</span>
+    <span class="tag familiar">Quen thuộc</span>
+    <span class="tag discovery">Khám phá</span>
+    <span style="font-size:12px;color:var(--gray-400);margin-left:8px">Dùng cho 3 slot recommendation</span>
+  </div>
+</div>
+
+<!-- BUTTONS -->
+<div class="section">
+  <div class="sec-title">Buttons</div>
+  <div class="btn-row" style="margin-bottom:14px">
+    <button class="btn btn-pri">Primary</button>
+    <button class="btn btn-sec">Secondary</button>
+    <button class="btn btn-ghost">Ghost</button>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-pri btn-sm">Small</button>
+    <button class="btn btn-pri">Default</button>
+    <button class="btn btn-pri btn-lg">Large</button>
+  </div>
+</div>
+
+<!-- INPUTS -->
+<div class="section">
+  <div class="sec-title">Inputs</div>
+  <div style="display:flex;gap:20px;flex-wrap:wrap">
+    <div class="demo-input">
+      <label>Email</label>
+      <input placeholder="minh@example.com">
+    </div>
+    <div class="demo-input">
+      <label>Email (focused)</label>
+      <input placeholder="minh@example.com" style="border-color:var(--coral);box-shadow:0 0 0 3px var(--coral-50)">
+    </div>
+    <div class="demo-input">
+      <label>Email (error)</label>
+      <input class="error" value="invalid-email">
+      <div class="err-msg">Email không hợp lệ</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARDS -->
+<div class="section">
+  <div class="sec-title">Cards</div>
+  <div class="card-row">
+    <div class="demo-card">
+      <div style="font-size:11px;font-weight:600;background:var(--green-50);color:var(--green-800);display:inline-block;padding:2px 10px;border-radius:20px;margin-bottom:8px">An toàn</div>
+      <div style="font-size:14px;font-weight:600;margin-bottom:3px">Bún chả Hương Liên</div>
+      <div style="font-size:11px;color:var(--gray-400)">45.000đ · 350m · ⭐ 4.6</div>
+    </div>
+    <div class="demo-card featured" style="position:relative;padding-top:20px">
+      <div style="position:absolute;top:-9px;left:12px;background:var(--coral);color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:8px">✦ AI đề xuất #1</div>
+      <div style="font-size:11px;font-weight:600;background:var(--purple-50);color:var(--purple-800);display:inline-block;padding:2px 10px;border-radius:20px;margin-bottom:8px">Quen thuộc</div>
+      <div style="font-size:14px;font-weight:600;margin-bottom:3px">Cơm tấm Ba Ghiền</div>
+      <div style="font-size:11px;color:var(--gray-400)">55.000đ · 500m · ⭐ 4.8</div>
+    </div>
+    <div class="demo-card">
+      <div style="font-size:11px;font-weight:600;background:var(--amber-50);color:var(--amber-800);display:inline-block;padding:2px 10px;border-radius:20px;margin-bottom:8px">Khám phá</div>
+      <div style="font-size:14px;font-weight:600;margin-bottom:3px">Gỏi cuốn Mai Xuân</div>
+      <div style="font-size:11px;color:var(--gray-400)">40.000đ · 700m · ⭐ 4.5</div>
+    </div>
+  </div>
+</div>
+
+<!-- SPACING -->
+<div class="section">
+  <div class="sec-title">Spacing Scale (4px base)</div>
+  <div class="space-row">
+    <div><div class="space-block" style="width:4px;height:4px"></div><div class="space-label">4px<br>--s-1</div></div>
+    <div><div class="space-block" style="width:8px;height:8px"></div><div class="space-label">8px<br>--s-2</div></div>
+    <div><div class="space-block" style="width:12px;height:12px"></div><div class="space-label">12px<br>--s-3</div></div>
+    <div><div class="space-block" style="width:16px;height:16px"></div><div class="space-label">16px<br>--s-4</div></div>
+    <div><div class="space-block" style="width:20px;height:20px"></div><div class="space-label">20px<br>--s-5</div></div>
+    <div><div class="space-block" style="width:24px;height:24px"></div><div class="space-label">24px<br>--s-6</div></div>
+    <div><div class="space-block" style="width:32px;height:32px"></div><div class="space-label">32px<br>--s-8</div></div>
+    <div><div class="space-block" style="width:40px;height:40px"></div><div class="space-label">40px<br>--s-10</div></div>
+    <div><div class="space-block" style="width:48px;height:48px"></div><div class="space-label">48px<br>--s-12</div></div>
+  </div>
+</div>
+
+<!-- BORDER RADIUS -->
+<div class="section">
+  <div class="sec-title">Border Radius</div>
+  <div class="radius-row">
+    <div><div class="radius-demo" style="border-radius:4px">4px<br>sm</div></div>
+    <div><div class="radius-demo" style="border-radius:8px">8px<br>md</div></div>
+    <div><div class="radius-demo" style="border-radius:12px">12px<br>lg</div></div>
+    <div><div class="radius-demo" style="border-radius:16px">16px<br>xl</div></div>
+    <div><div class="radius-demo" style="border-radius:9999px;width:60px;height:60px">full<br>pill</div></div>
+  </div>
+</div>
+
+<!-- AVATARS -->
+<div class="section">
+  <div class="sec-title">Avatars</div>
+  <div class="av-row">
+    <div class="av" style="width:22px;height:22px;font-size:8px;background:#CECBF6;color:#3C3489">H</div>
+    <div class="av" style="width:28px;height:28px;font-size:10px;background:#F5C4B3;color:#712B13">T</div>
+    <div class="av" style="width:36px;height:36px;font-size:13px;background:#9FE1CB;color:#085041">M</div>
+    <div class="av" style="width:44px;height:44px;font-size:16px;background:#F4C0D1;color:#72243E">D</div>
+    <div class="av" style="width:64px;height:64px;font-size:22px;background:var(--coral-50);color:var(--coral)">A</div>
+    <div style="font-size:12px;color:var(--gray-400);margin-left:10px">22px / 28px / 36px / 44px / 64px</div>
+  </div>
+</div>
+
+</body>
+</html>

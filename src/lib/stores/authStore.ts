@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { authApi } from '@/lib/api/auth';
+import { clearAuthCookies, setAuthCookies } from '@/lib/utils/authCookies';
 
 interface User {
   id: string;
@@ -35,12 +36,15 @@ export const useAuthStore = create<AuthState>()(
       isAuthenticated: false,
       isHydrated: false,
 
-      setAuth: (user, tokens) => set({
-        user,
-        accessToken: tokens.accessToken,
-        refreshToken: tokens.refreshToken,
-        isAuthenticated: true,
-      }),
+      setAuth: (user, tokens) => {
+        setAuthCookies(tokens.accessToken, tokens.refreshToken);
+        set({
+          user,
+          accessToken: tokens.accessToken,
+          refreshToken: tokens.refreshToken,
+          isAuthenticated: true,
+        });
+      },
 
       setUser: (user) => set({ user }),
 
@@ -53,7 +57,8 @@ export const useAuthStore = create<AuthState>()(
       },
 
       logout: () => {
-        authApi.logout().catch(() => {}); // Fire and forget
+        authApi.logout().catch(() => {});
+        clearAuthCookies();
         set({
           user: null,
           accessToken: null,

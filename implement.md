@@ -109,31 +109,42 @@
 
 ### 1.10 Utils
 - [x] Tạo `format.ts` (formatPrice, formatDistance, formatDate)
-- [ ] Tạo `validation.ts` (Zod schemas)
+- [x] Tạo `validation.ts` (Zod schemas)
 - [ ] Tạo `analytics.ts` (PostHog integration)
 
 ---
 
 ## 🎯 Phase 2: Authentication Flow (Tuần 1-2)
 
+**Status:** Completed  
+**Last updated:** 2026-04-29 11:30 UTC+07  
+**Progress notes:**
+- Created auth route group layout with mobile-first branded auth shell.
+- Implemented login, register, and forgot password pages with `react-hook-form` + `zod`.
+- Wired login/register mutations to `authApi` and `authStore`.
+- Added auth cookies and middleware for protected-route redirects.
+- Google OAuth currently has a user-facing placeholder until a real Google client integration is configured.
+- Validation passed: `npm run type-check`, `npm run lint`, `npm run build`.
+- Note: lint/build still show a non-blocking Next.js warning about `<img>` usage in `Avatar`.
+
 ### 2.1 Auth Pages
-- [ ] Tạo `src/app/(auth)/layout.tsx`
-- [ ] Tạo `src/app/(auth)/login/page.tsx`
-- [ ] Tạo `src/app/(auth)/register/page.tsx`
-- [ ] Tạo `src/app/(auth)/forgot-password/page.tsx`
+- [x] Tạo `src/app/(auth)/layout.tsx`
+- [x] Tạo `src/app/(auth)/login/page.tsx`
+- [x] Tạo `src/app/(auth)/register/page.tsx`
+- [x] Tạo `src/app/(auth)/forgot-password/page.tsx`
 
 ### 2.2 Auth Logic
-- [ ] Implement login form với react-hook-form + Zod
-- [ ] Implement register form
+- [x] Implement login form với react-hook-form + Zod
+- [x] Implement register form
 - [ ] Implement Google OAuth integration
-- [ ] Implement forgot password flow
+- [x] Implement forgot password flow
 - [ ] Implement email verification (optional for MVP)
 
 ### 2.3 Auth State
-- [ ] Connect authStore với API client
-- [ ] Implement token refresh logic
-- [ ] Implement auto-logout on 401
-- [ ] Implement protected route middleware
+- [x] Connect authStore với API client
+- [x] Implement token refresh logic
+- [x] Implement auto-logout on 401
+- [x] Implement protected route middleware
 
 ### 2.4 Testing
 - [ ] Unit tests cho auth utils

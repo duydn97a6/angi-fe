@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F9F9F7;
+  --bg-tertiary: #F1EFE8;
+}
+
+body {
+  @apply bg-white text-gray-900;
+}

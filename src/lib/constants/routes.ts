@@ -1,0 +1,16 @@
+export const ROUTES = {
+  HOME: '/home',
+  LOGIN: '/login',
+  REGISTER: '/register',
+  ONBOARDING: '/onboarding',
+  ONBOARDING_REGION: '/onboarding/region',
+  ONBOARDING_LOCATION: '/onboarding/location',
+  ONBOARDING_DIET: '/onboarding/diet',
+  ONBOARDING_BUDGET: '/onboarding/budget',
+  ONBOARDING_FINISH: '/onboarding/finish',
+  HISTORY: '/history',
+  PROFILE: '/profile',
+  SETTINGS: '/profile/settings',
+  GROUPS: '/groups',
+  RESTAURANT: (id: string) => `/restaurants/${id}`,
+} as const;

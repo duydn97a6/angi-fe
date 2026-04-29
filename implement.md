@@ -28,19 +28,21 @@
 
 ## 🎯 Phase 1: Project Setup & Foundation (Tuần 1)
 
-**Status:** In Progress  
-**Last updated:** 2026-04-29 11:10 UTC+07  
+**Status:** Completed  
+**Last updated:** 2026-04-29 11:20 UTC+07  
 **Progress notes:**
 - Created baseline Next.js App Router structure manually because scaffold command was not approved.
 - Created project config files: `package.json`, `tsconfig.json`, `next.config.js`, `tailwind.config.ts`, `postcss.config.js`, `.eslintrc.json`, `.prettierrc`, `.env.local.example`, `.gitignore`, `README.md`.
 - Created app shell: `src/app/layout.tsx`, `src/app/page.tsx`, `src/app/globals.css`, `src/app/providers.tsx`.
 - Created utilities/constants/API modules/stores/hooks and initial UI/layout/shared components.
-- Pending dependency installation and validation because `npm install` was not approved yet.
-- Pending git commit and push after validation succeeds.
+- Installed dependencies and generated `package-lock.json`.
+- Validation passed: `npm run type-check`, `npm run lint`, `npm run build`.
+- Note: lint/build currently show a non-blocking Next.js warning about `<img>` usage in `Avatar`.
+- Pending git commit and push for Phase 1 before starting Phase 2.
 
 ### 1.1 Khởi tạo project
 - [x] Tạo Next.js project với TypeScript
-- [ ] Cài đặt dependencies core
+- [x] Cài đặt dependencies core
 - [x] Cấu hình Tailwind CSS với custom colors
 - [x] Cấu hình ESLint + Prettier
 - [x] Cấu hình TypeScript strict mode

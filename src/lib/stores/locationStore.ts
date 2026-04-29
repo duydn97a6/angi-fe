@@ -16,7 +16,7 @@ interface LocationState {
 
   getCurrentLocation: () => Promise<void>;
   setManualLocation: (location: Omit<Location, 'source'>) => void;
-  useOfficeLocation: (office: { lat: number; lng: number; address: string }) => void;
+  setOfficeLocation: (office: { lat: number; lng: number; address: string }) => void;
 }
 
 export const useLocationStore = create<LocationState>((set) => ({
@@ -68,7 +68,7 @@ export const useLocationStore = create<LocationState>((set) => ({
     error: null,
   }),
 
-  useOfficeLocation: (office) => set({
+  setOfficeLocation: (office) => set({
     currentLocation: { ...office, source: 'office' },
     error: null,
   }),

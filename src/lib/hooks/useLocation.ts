@@ -4,20 +4,18 @@ import { useAuth } from './useAuth';
 
 export function useLocation() {
   const { user } = useAuth();
-  const { currentLocation, isLoading, error, getCurrentLocation, useOfficeLocation } = useLocationStore();
+  const { currentLocation, isLoading, error, getCurrentLocation, setOfficeLocation } = useLocationStore();
 
   useEffect(() => {
     if (!currentLocation) {
-      // Try GPS first
       getCurrentLocation().then(() => {
-        // If failed and user has office location, fallback
         const state = useLocationStore.getState();
         if (state.error && user?.preferences?.officeLocation) {
-          useOfficeLocation(user.preferences.officeLocation);
+          setOfficeLocation(user.preferences.officeLocation);
         }
       });
     }
-  }, [user]);
+  }, [currentLocation, getCurrentLocation, setOfficeLocation, user]);
 
   return {
     location: currentLocation,

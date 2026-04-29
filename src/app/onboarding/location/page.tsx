@@ -35,6 +35,7 @@ export default function LocationPage() {
       description="AI sẽ tìm quán ăn quanh đây"
       disabled={!hasAddress}
       onNext={handleNext}
+      onBack={() => router.push('/onboarding/region')}
       onSkip={() => router.push('/home')}
     >
       <Input

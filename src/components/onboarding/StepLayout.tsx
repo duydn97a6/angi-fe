@@ -8,6 +8,7 @@ interface StepLayoutProps {
   disabled?: boolean;
   loading?: boolean;
   onNext: () => void;
+  onBack?: () => void;
   onSkip?: () => void;
 }
 
@@ -19,10 +20,16 @@ export function StepLayout({
   disabled,
   loading,
   onNext,
+  onBack,
   onSkip,
 }: StepLayoutProps) {
   return (
     <div>
+      {onBack && (
+        <button type="button" className="mb-5 text-body-sm font-medium text-gray-500" onClick={onBack}>
+          ← Quay lại
+        </button>
+      )}
       <h1 className="mb-1.5 text-h2 font-medium text-gray-900">{title}</h1>
       <p className="mb-5 text-body-sm text-gray-500">{description}</p>
       {children}

@@ -34,6 +34,7 @@ export default function BudgetPage() {
       description="AI sẽ ưu tiên gợi ý phù hợp túi tiền của bạn"
       disabled={!selected}
       onNext={handleNext}
+      onBack={() => router.push('/onboarding/diet')}
       onSkip={() => router.push('/home')}
     >
       <div className="space-y-2">

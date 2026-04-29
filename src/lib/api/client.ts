@@ -1,5 +1,6 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { API_BASE_URL } from '@/lib/constants/config';
+import { useAuthStore } from '@/lib/stores/authStore';
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,
@@ -9,13 +10,28 @@ export const apiClient = axios.create({
 
 // Request interceptor: Add JWT token
 apiClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-  const authState = typeof window !== 'undefined' ? localStorage.getItem('angi-auth') : null;
-  const token = authState ? JSON.parse(authState)?.state?.accessToken : null;
+  const token = getAccessToken();
   if (token && config.headers) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 });
+
+function getAccessToken() {
+  if (typeof window === 'undefined') return null;
+
+  const runtimeToken = useAuthStore.getState().accessToken;
+  if (runtimeToken) return runtimeToken;
+
+  const authState = localStorage.getItem('angi-auth');
+  const persistedToken = authState ? JSON.parse(authState)?.state?.accessToken : null;
+  if (persistedToken) return persistedToken;
+
+  return document.cookie
+    .split('; ')
+    .find((cookie) => cookie.startsWith('accessToken='))
+    ?.split('=')[1] ?? null;
+}
 
 // Response interceptor: Handle errors
 apiClient.interceptors.response.use(

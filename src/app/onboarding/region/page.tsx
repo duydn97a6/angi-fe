@@ -29,6 +29,7 @@ export default function RegionPage() {
       description="Để AI hiểu khẩu vị của bạn hơn"
       disabled={!selected}
       onNext={handleNext}
+      onBack={() => router.push('/onboarding')}
       onSkip={() => router.push('/home')}
     >
       <div className="space-y-2">

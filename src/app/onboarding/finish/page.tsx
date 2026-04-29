@@ -50,6 +50,13 @@ export default function FinishPage() {
       <Button className="mt-8" fullWidth loading={completeMutation.isPending} onClick={handleComplete}>
         Hoàn tất và vào trang chủ
       </Button>
+      <button
+        type="button"
+        className="mt-3 w-full text-center text-body-sm font-medium text-gray-500"
+        onClick={() => router.push('/onboarding/budget')}
+      >
+        ← Quay lại
+      </button>
     </div>
   );
 }

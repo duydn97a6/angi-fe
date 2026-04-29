@@ -28,10 +28,15 @@ function LoginContent() {
   const loginMutation = useMutation({
     mutationFn: authApi.login,
     onSuccess: (data) => {
-      setAuth(data.user, {
-        accessToken: data.tokens.accessToken,
-        refreshToken: data.tokens.refreshToken,
-      });
+      try {
+        setAuth(data.user, {
+          accessToken: data.tokens?.accessToken,
+          refreshToken: data.tokens?.refreshToken,
+        });
+      } catch {
+        toast.error('Backend không trả về token hợp lệ');
+        return;
+      }
       toast.success('Đăng nhập thành công');
       router.push(data.user?.isOnboarded ? next : '/onboarding');
     },

@@ -25,10 +25,15 @@ export default function RegisterPage() {
   const registerMutation = useMutation({
     mutationFn: authApi.register,
     onSuccess: (data) => {
-      setAuth(data.user, {
-        accessToken: data.tokens.accessToken,
-        refreshToken: data.tokens.refreshToken,
-      });
+      try {
+        setAuth(data.user, {
+          accessToken: data.tokens?.accessToken,
+          refreshToken: data.tokens?.refreshToken,
+        });
+      } catch {
+        toast.error('Backend không trả về token hợp lệ');
+        return;
+      }
       toast.success('Đăng ký thành công');
       router.push('/onboarding');
     },

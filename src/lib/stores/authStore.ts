@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { authApi } from '@/lib/api/auth';
 import { clearAuthCookies, setAuthCookies } from '@/lib/utils/authCookies';
+import { normalizeToken } from '@/lib/utils/token';
 
 interface User {
   id: string;
@@ -21,7 +22,7 @@ interface AuthState {
   isHydrated: boolean;
 
   // Actions
-  setAuth: (user: User, tokens: { accessToken: string; refreshToken: string }) => void;
+  setAuth: (user: User, tokens: { accessToken?: string | null; refreshToken?: string | null }) => void;
   setUser: (user: User) => void;
   refresh: () => Promise<void>;
   logout: () => void;
@@ -37,11 +38,24 @@ export const useAuthStore = create<AuthState>()(
       isHydrated: false,
 
       setAuth: (user, tokens) => {
-        setAuthCookies(tokens.accessToken, tokens.refreshToken);
+        const accessToken = normalizeToken(tokens.accessToken);
+        const refreshToken = normalizeToken(tokens.refreshToken);
+        if (!accessToken || !refreshToken) {
+          clearAuthCookies();
+          set({
+            user: null,
+            accessToken: null,
+            refreshToken: null,
+            isAuthenticated: false,
+          });
+          throw new Error('Invalid auth tokens');
+        }
+
+        setAuthCookies(accessToken, refreshToken);
         set({
           user,
-          accessToken: tokens.accessToken,
-          refreshToken: tokens.refreshToken,
+          accessToken,
+          refreshToken,
           isAuthenticated: true,
         });
       },
@@ -53,7 +67,9 @@ export const useAuthStore = create<AuthState>()(
         if (!refreshToken) throw new Error('No refresh token');
 
         const response = await authApi.refresh(refreshToken);
-        set({ accessToken: response.accessToken });
+        const accessToken = normalizeToken(response.accessToken);
+        if (!accessToken) throw new Error('Invalid access token');
+        set({ accessToken });
       },
 
       logout: () => {

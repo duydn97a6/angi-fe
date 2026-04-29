@@ -40,7 +40,7 @@ export const useAuthStore = create<AuthState>()(
       setAuth: (user, tokens) => {
         const accessToken = normalizeToken(tokens.accessToken);
         const refreshToken = normalizeToken(tokens.refreshToken);
-        if (!accessToken || !refreshToken) {
+        if (!accessToken) {
           clearAuthCookies();
           set({
             user: null,

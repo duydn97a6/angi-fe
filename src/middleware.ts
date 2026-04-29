@@ -5,21 +5,36 @@ const authRoutes = ['/login', '/register', '/forgot-password'];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const accessToken = request.cookies.get('accessToken')?.value;
+  const accessToken = normalizeToken(request.cookies.get('accessToken')?.value);
   const isProtectedRoute = protectedRoutes.some((route) => pathname.startsWith(route));
   const isAuthRoute = authRoutes.some((route) => pathname.startsWith(route));
 
   if (isProtectedRoute && !accessToken) {
     const loginUrl = new URL('/login', request.url);
     loginUrl.searchParams.set('next', pathname);
-    return NextResponse.redirect(loginUrl);
+    return clearInvalidAuthCookies(NextResponse.redirect(loginUrl));
   }
 
   if (isAuthRoute && accessToken) {
     return NextResponse.redirect(new URL('/home', request.url));
   }
 
-  return NextResponse.next();
+  const response = NextResponse.next();
+  if (!accessToken && request.cookies.has('accessToken')) {
+    return clearInvalidAuthCookies(response);
+  }
+
+  return response;
+}
+
+function normalizeToken(token?: string) {
+  return token && token.trim().length > 0 && token !== 'undefined' && token !== 'null' ? token : null;
+}
+
+function clearInvalidAuthCookies(response: NextResponse) {
+  response.cookies.delete('accessToken');
+  response.cookies.delete('refreshToken');
+  return response;
 }
 
 export const config = {

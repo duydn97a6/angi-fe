@@ -24,12 +24,14 @@ interface OnboardingState extends OnboardingData {
   setExcludedFoods: (foods: string[]) => void;
   setBudget: (min: number, max: number) => void;
   setDietType: (diet: OnboardingData['dietType']) => void;
+  setFavoriteCuisines: (cuisines: string[]) => void;
+  getPayload: () => OnboardingData;
   reset: () => void;
 }
 
 export const useOnboardingStore = create<OnboardingState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       currentStep: 1,
 
       setRegion: (region) => set({ region, currentStep: 2 }),
@@ -37,6 +39,28 @@ export const useOnboardingStore = create<OnboardingState>()(
       setExcludedFoods: (foods) => set({ excludedFoods: foods, currentStep: 4 }),
       setBudget: (min, max) => set({ budgetMin: min, budgetMax: max, currentStep: 5 }),
       setDietType: (diet) => set({ dietType: diet }),
+      setFavoriteCuisines: (cuisines) => set({ favoriteCuisines: cuisines }),
+      getPayload: () => {
+        const {
+          region,
+          office,
+          excludedFoods,
+          budgetMin,
+          budgetMax,
+          dietType,
+          favoriteCuisines,
+        } = get();
+
+        return {
+          region,
+          office,
+          excludedFoods,
+          budgetMin,
+          budgetMax,
+          dietType,
+          favoriteCuisines,
+        };
+      },
       reset: () => set({
         region: undefined,
         office: undefined,

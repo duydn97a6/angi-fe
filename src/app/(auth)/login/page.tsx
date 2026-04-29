@@ -29,8 +29,8 @@ function LoginContent() {
     mutationFn: authApi.login,
     onSuccess: (data) => {
       setAuth(data.user, {
-        accessToken: data.accessToken,
-        refreshToken: data.refreshToken,
+        accessToken: data.tokens.accessToken,
+        refreshToken: data.tokens.refreshToken,
       });
       toast.success('Đăng nhập thành công');
       router.push(data.user?.isOnboarded ? next : '/onboarding');

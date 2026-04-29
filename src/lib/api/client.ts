@@ -9,8 +9,8 @@ export const apiClient = axios.create({
 
 // Request interceptor: Add JWT token
 apiClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-  // Token will be added from authStore in actual implementation
-  const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
+  const authState = typeof window !== 'undefined' ? localStorage.getItem('angi-auth') : null;
+  const token = authState ? JSON.parse(authState)?.state?.accessToken : null;
   if (token && config.headers) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -22,10 +22,10 @@ apiClient.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
     if (error.response?.status === 401) {
-      // Handle token refresh or redirect to login
       if (typeof window !== 'undefined') {
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('angi-auth');
+        document.cookie = 'accessToken=; path=/; max-age=0; SameSite=Lax';
+        document.cookie = 'refreshToken=; path=/; max-age=0; SameSite=Lax';
         window.location.href = '/login';
       }
     }

@@ -26,8 +26,8 @@ export default function RegisterPage() {
     mutationFn: authApi.register,
     onSuccess: (data) => {
       setAuth(data.user, {
-        accessToken: data.accessToken,
-        refreshToken: data.refreshToken,
+        accessToken: data.tokens.accessToken,
+        refreshToken: data.tokens.refreshToken,
       });
       toast.success('Đăng ký thành công');
       router.push('/onboarding');

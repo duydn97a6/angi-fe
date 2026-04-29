@@ -25,7 +25,18 @@ interface OnboardingState extends OnboardingData {
   setBudget: (min: number, max: number) => void;
   setDietType: (diet: OnboardingData['dietType']) => void;
   setFavoriteCuisines: (cuisines: string[]) => void;
-  getPayload: () => OnboardingData;
+  getPayload: () => {
+    region?: OnboardingData['region'];
+    officeLat?: number;
+    officeLng?: number;
+    officeAddress?: string;
+    searchRadiusMeters?: number;
+    dietType?: OnboardingData['dietType'];
+    excludedFoods?: string[];
+    favoriteCuisines?: string[];
+    budgetMin?: number;
+    budgetMax?: number;
+  };
   reset: () => void;
 }
 
@@ -53,7 +64,10 @@ export const useOnboardingStore = create<OnboardingState>()(
 
         return {
           region,
-          office,
+          officeLat: office?.lat,
+          officeLng: office?.lng,
+          officeAddress: office?.address,
+          searchRadiusMeters: office?.radius,
           excludedFoods,
           budgetMin,
           budgetMax,

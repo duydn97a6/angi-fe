@@ -1,7 +1,7 @@
 import { apiClient } from './client';
 
 export const recommendationApi = {
-  get: async (params: { lat: number; lng: number }) => {
+  get: async (params: { lat: number; lng: number; mealType?: string; excludeRestaurantIds?: string[]; forceRefresh?: boolean }) => {
     const response = await apiClient.get('/recommendations', { params });
     return response.data;
   },

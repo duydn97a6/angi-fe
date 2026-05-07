@@ -1,7 +1,9 @@
 export const ROUTES = {
   HOME: '/home',
+  ANTI_FILTER: '/home/anti-filter',
   LOGIN: '/login',
   REGISTER: '/register',
+  FORGOT_PASSWORD: '/forgot-password',
   ONBOARDING: '/onboarding',
   ONBOARDING_REGION: '/onboarding/region',
   ONBOARDING_LOCATION: '/onboarding/location',

@@ -1,7 +1,7 @@
 import { apiClient } from './client';
 
 export const mealApi = {
-  getHistory: async (params?: { period?: string }) => {
+  getHistory: async (params?: { days?: number }) => {
     const response = await apiClient.get('/meals/history', { params });
     return response.data;
   },

@@ -76,9 +76,9 @@
 ### 1.5 Layout Components
 - [x] Tạo `Header` component (Desktop nav)
 - [x] Tạo `BottomNav` component (Mobile nav)
-- [ ] Tạo `Sidebar` component (Desktop)
+- [x] Tạo `Sidebar` component (Desktop)
 - [x] Tạo `ContextBar` component (Weather/location/time)
-- [ ] Tạo `AuthGuard` component
+- [x] Tạo `AuthGuard` component
 
 ### 1.6 Shared Components
 - [x] Tạo `EmptyState` component
@@ -198,48 +198,63 @@
 
 ## 🎯 Phase 4: Home Screen - Core Feature (Tuần 2-3)
 
+**Status:** Completed
+**Last updated:** 2026-05-07 UTC+07
+**Progress notes:**
+- Created recommendation components: RecommendationCard, RecommendationGrid, CategoryTag, FeaturedBadge, AiExplanation, RefreshButton.
+- Created feedback components: FeedbackModal, EmojiSelector, RegretSelector (ChipSelector reused from onboarding).
+- Created AuthGuard, Sidebar layout components.
+- Created main layout `src/app/(main)/layout.tsx` with Header + BottomNav + AuthGuard.
+- Created home page `src/app/(main)/home/page.tsx` with greeting, context bar, recommendation grid, action buttons, WeeklyStats.
+- Created anti-filter page `src/app/(main)/home/anti-filter/page.tsx` with multi-select exclusions.
+- Updated types, API modules, hooks, and routes constants.
+- Updated feedback API to match backend spec (recommendationId, restaurantId, dishId).
+- Created useMealHistory hook with useMealStats and useSubmitFeedback.
+- Validation passed: `npm run type-check`, `npm run lint`, `npm run build`.
+- Note: lint/build still show a non-blocking Next.js warning about `<img>` usage in `Avatar`.
+
 ### 4.1 Recommendation Components
-- [ ] Tạo `RecommendationCard` component
-- [ ] Tạo `RecommendationGrid` component
-- [ ] Tạo `CategoryTag` component (An toàn/Quen thuộc/Khám phá)
-- [ ] Tạo `FeaturedBadge` component
-- [ ] Tạo `AiExplanation` component
-- [ ] Tạo `RefreshButton` component
+- [x] Tạo `RecommendationCard` component
+- [x] Tạo `RecommendationGrid` component
+- [x] Tạo `CategoryTag` component (An toàn/Quen thuộc/Khám phá)
+- [x] Tạo `FeaturedBadge` component
+- [x] Tạo `AiExplanation` component
+- [x] Tạo `RefreshButton` component
 
 ### 4.2 Home Page
-- [ ] Tạo `src/app/(main)/layout.tsx` (Main layout với Header + BottomNav)
-- [ ] Tạo `src/app/(main)/home/page.tsx`
-- [ ] Implement greeting với user name
-- [ ] Implement context bar (weather, location, time)
-- [ ] Implement recommendation cards grid
-- [ ] Implement action buttons (Gợi ý khác, Không muốn ăn..., Rủ nhóm)
-- [ ] Implement WeeklyStats component
+- [x] Tạo `src/app/(main)/layout.tsx` (Main layout với Header + BottomNav)
+- [x] Tạo `src/app/(main)/home/page.tsx`
+- [x] Implement greeting với user name
+- [x] Implement context bar (weather, location, time)
+- [x] Implement recommendation cards grid
+- [x] Implement action buttons (Gợi ý khác, Không muốn ăn..., Rủ nhóm)
+- [x] Implement WeeklyStats component
 
 ### 4.3 Recommendation Logic
-- [ ] Tạo `useRecommendation` hook với React Query
-- [ ] Implement recommendation API call
-- [ ] Implement caching strategy (15min)
-- [ ] Implement loading skeleton
-- [ ] Implement error handling
-- [ ] Implement card click tracking
-- [ ] Implement deep link to GrabFood/ShopeeFood
+- [x] Tạo `useRecommendation` hook với React Query
+- [x] Implement recommendation API call
+- [x] Implement caching strategy (15min)
+- [x] Implement loading skeleton
+- [x] Implement error handling
+- [x] Implement card click tracking
+- [x] Implement deep link to GrabFood/ShopeeFood
 
 ### 4.4 Anti-Filter Feature
-- [ ] Tạo `src/app/(main)/home/anti-filter/page.tsx`
-- [ ] Implement multi-select modal
-- [ ] Implement food category exclusion
-- [ ] Implement mood exclusion
-- [ ] Submit to backend và refresh recommendations
+- [x] Tạo `src/app/(main)/home/anti-filter/page.tsx`
+- [x] Implement multi-select modal
+- [x] Implement food category exclusion
+- [x] Implement mood exclusion
+- [x] Submit to backend và refresh recommendations
 
 ---
 
 ## 🎯 Phase 5: Feedback System (Tuần 3)
 
 ### 5.1 Feedback Components
-- [ ] Tạo `FeedbackModal` component
-- [ ] Tạo `EmojiSelector` component (😕 😐 😋)
-- [ ] Tạo `RegretSelector` component (Không/Hơi/Có)
-- [ ] Tạo `TagSelector` component (Ngon/Rẻ/Nhanh/Gần/Dơ/Đắt)
+- [x] Tạo `FeedbackModal` component
+- [x] Tạo `EmojiSelector` component (😕 😐 😋)
+- [x] Tạo `RegretSelector` component (Không/Hơi/Có)
+- [x] Tạo `TagSelector` component (Ngon/Rẻ/Nhanh/Gần/Dơ/Đắt) — reused ChipSelector from onboarding
 
 ### 5.2 Feedback Logic
 - [ ] Implement feedback API call

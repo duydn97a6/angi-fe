@@ -21,4 +21,8 @@ export const userApi = {
     const response = await apiClient.post('/users/me/onboarding/complete', data);
     return unwrapApiResponse(response.data);
   },
+
+  deleteAccount: async () => {
+    await apiClient.delete('/users/me');
+  },
 };

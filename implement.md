@@ -323,25 +323,39 @@
 
 ## 🎯 Phase 7: Profile & Settings (Tuần 4)
 
+**Status:** Completed
+**Last updated:** 2026-05-08 UTC+07
+**Progress notes:**
+- Created Profile page with avatar, user info, AI understanding progress bar (computed from meal count), stats summary, and settings menu.
+- Created Preferences settings page with region, diet type, excluded foods (reused ChipSelector), and budget range sliders.
+- Created Location settings page with GPS detection, office address input, and search radius selector.
+- Created Notifications settings page with toggle switches for 4 notification types (meal time, feedback, group, weekly).
+- Created Privacy settings page with data export (JSON download) and account deletion (with confirmation dialog).
+- Added `deleteAccount` method to userApi.
+- AI understanding percentage derived from total meals (50 meals = 100%).
+- All settings pages use `userApi.updatePreferences` and update auth store on save.
+- Validation passed: `npm run type-check`, `npm run lint`, `npm run build`.
+- Note: lint/build still show a non-blocking Next.js warning about `<img>` usage in `Avatar`.
+
 ### 7.1 Profile Page
-- [ ] Tạo `src/app/(main)/profile/page.tsx`
-- [ ] Implement user avatar và info
-- [ ] Implement AI understanding progress bar
-- [ ] Implement menu items
-- [ ] Implement stats summary
+- [x] Tạo `src/app/(main)/profile/page.tsx`
+- [x] Implement user avatar và info
+- [x] Implement AI understanding progress bar
+- [x] Implement menu items
+- [x] Implement stats summary
 
 ### 7.2 Settings Pages
-- [ ] Tạo `src/app/(main)/profile/settings/preferences/page.tsx`
-- [ ] Tạo `src/app/(main)/profile/settings/location/page.tsx`
-- [ ] Tạo `src/app/(main)/profile/settings/notifications/page.tsx`
-- [ ] Tạo `src/app/(main)/profile/settings/privacy/page.tsx`
+- [x] Tạo `src/app/(main)/profile/settings/preferences/page.tsx`
+- [x] Tạo `src/app/(main)/profile/settings/location/page.tsx`
+- [x] Tạo `src/app/(main)/profile/settings/notifications/page.tsx`
+- [x] Tạo `src/app/(main)/profile/settings/privacy/page.tsx`
 
 ### 7.3 Settings Logic
-- [ ] Implement preference update API
-- [ ] Implement location update
-- [ ] Implement notification preferences
-- [ ] Implement data export
-- [ ] Implement account deletion
+- [x] Implement preference update API
+- [x] Implement location update
+- [x] Implement notification preferences
+- [x] Implement data export
+- [x] Implement account deletion
 
 ---
 

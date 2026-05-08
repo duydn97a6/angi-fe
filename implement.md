@@ -288,24 +288,36 @@
 
 ## 🎯 Phase 6: History & Stats (Tuần 3-4)
 
+**Status:** Completed
+**Last updated:** 2026-05-08 UTC+07
+**Progress notes:**
+- Created MealEntry, StatsCard, HealthWarning components in `src/components/meal/`.
+- Created Tabs UI component in `src/components/ui/tabs.tsx`.
+- Created history page `src/app/(main)/history/page.tsx` with period tabs (week/month/all), stats grid (total meals, spending, avg rating), health warning, top cuisines section, and date-grouped meal timeline (Hôm nay / Hôm qua / date).
+- Reused existing `useMealHistory` and `useMealStats` hooks (already built in Phase 5).
+- Added `days` param mapping: week→7 days, month→30 days, all→no limit.
+- Date grouping uses Vietnamese locale labels ("Hôm nay", "Hôm qua", weekday+date).
+- Validation passed: `npm run type-check`, `npm run lint`, `npm run build`.
+- Note: lint/build still show a non-blocking Next.js warning about `<img>` usage in `Avatar`.
+
 ### 6.1 History Components
-- [ ] Tạo `MealEntry` component
-- [ ] Tạo `StatsCard` component
-- [ ] Tạo `HealthWarning` component
+- [x] Tạo `MealEntry` component
+- [x] Tạo `StatsCard` component
+- [x] Tạo `HealthWarning` component
 
 ### 6.2 History Page
-- [ ] Tạo `src/app/(main)/history/page.tsx`
-- [ ] Implement tabs (Tuần này/Tháng này/Tất cả)
-- [ ] Implement WeeklyStats grid
-- [ ] Implement meal timeline grouped by date
+- [x] Tạo `src/app/(main)/history/page.tsx`
+- [x] Implement tabs (Tuần này/Tháng này/Tất cả)
+- [x] Implement WeeklyStats grid
+- [x] Implement meal timeline grouped by date
 - [ ] Implement filter functionality
 
 ### 6.3 History Logic
-- [ ] Tạo `useMealHistory` hook
-- [ ] Implement history API call
-- [ ] Implement stats calculation
-- [ ] Implement health pattern detection
-- [ ] Implement date grouping
+- [x] Tạo `useMealHistory` hook
+- [x] Implement history API call
+- [x] Implement stats calculation
+- [x] Implement health pattern detection
+- [x] Implement date grouping
 
 ---
 

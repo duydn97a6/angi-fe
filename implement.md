@@ -250,6 +250,21 @@
 
 ## 🎯 Phase 5: Feedback System (Tuần 3)
 
+**Status:** Completed
+**Last updated:** 2026-05-08 UTC+07
+**Progress notes:**
+- All feedback components were already built (FeedbackModal, EmojiSelector, RegretSelector).
+- Created `feedbackScheduleStore.ts` (Zustand with persist) to queue pending feedback after card clicks.
+- Created `useFeedbackSchedule` hook with 2-hour scheduling, 60s polling, and browser Notification API support.
+- Created `analytics.ts` stubs for event tracking (PostHog integration point).
+- Updated `useSubmitFeedback` hook with proper error handling and analytics tracking.
+- Wired HomePage to use `useSubmitFeedback` hook, `useFeedbackSchedule` hook, and real `useMealStats` data.
+- Implemented undo support: 10-second toast with "Hoàn tác" button that re-opens FeedbackModal.
+- Added push notification mock via Browser Notification API + sonner toast reminders.
+- Replaced hardcoded WeeklyStats with live `useMealStats` data.
+- Validation passed: `npm run type-check`, `npm run lint`, `npm run build`.
+- Note: lint/build still show a non-blocking Next.js warning about `<img>` usage in `Avatar`.
+
 ### 5.1 Feedback Components
 - [x] Tạo `FeedbackModal` component
 - [x] Tạo `EmojiSelector` component (😕 😐 😋)
@@ -257,17 +272,17 @@
 - [x] Tạo `TagSelector` component (Ngon/Rẻ/Nhanh/Gần/Dơ/Đắt) — reused ChipSelector from onboarding
 
 ### 5.2 Feedback Logic
-- [ ] Implement feedback API call
-- [ ] Implement push notification trigger (mock for web)
-- [ ] Implement feedback scheduling (2 hours after meal)
-- [ ] Connect feedback với user preference update
-- [ ] Track feedback analytics
+- [x] Implement feedback API call
+- [x] Implement push notification trigger (mock for web)
+- [x] Implement feedback scheduling (2 hours after meal)
+- [x] Connect feedback với user preference update
+- [x] Track feedback analytics
 
 ### 5.3 Feedback States
-- [ ] Loading state
-- [ ] Success state với toast
-- [ ] Error handling
-- [ ] Undo support (10 seconds)
+- [x] Loading state
+- [x] Success state với toast
+- [x] Error handling
+- [x] Undo support (10 seconds)
 
 ---
 

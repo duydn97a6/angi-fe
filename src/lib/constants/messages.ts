@@ -18,6 +18,9 @@ export const MESSAGES = {
   FEEDBACK: {
     SUCCESS: 'Cảm ơn feedback! AI sẽ học thêm.',
     ERROR: 'Không thể gửi feedback',
+    UNDO: 'Đã gửi feedback. Hoàn tác?',
+    UNDONE: 'Đã hoàn tác feedback',
+    SCHEDULED: 'Sẽ nhắc bạn feedback sau 2 giờ nữa',
   },
   COMMON: {
     LOADING: 'Đang tải...',

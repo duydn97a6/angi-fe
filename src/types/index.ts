@@ -31,6 +31,11 @@ export interface Restaurant {
   avgPrice?: number;
   distance?: number;
   rating?: number;
+  address?: string;
+  phone?: string;
+  openingHours?: string;
+  description?: string;
+  imageUrl?: string;
   deliveryLinks?: {
     grabfood?: string;
     shopeefood?: string;
@@ -42,6 +47,9 @@ export interface Dish {
   name: string;
   price?: number;
   imageUrl?: string;
+  description?: string;
+  isPopular?: boolean;
+  category?: string;
 }
 
 export interface RecommendationItem {

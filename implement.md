@@ -361,17 +361,30 @@
 
 ## 🎯 Phase 8: Restaurant Detail (Tuần 4)
 
+**Status:** Completed
+**Last updated:** 2026-05-11 UTC+07
+**Progress notes:**
+- Created restaurant components: RestaurantCard, RestaurantDetail (with skeleton), DishCard, DishList (with category filter tabs).
+- Extended Restaurant type with address, phone, openingHours, description, imageUrl fields.
+- Extended Dish type with description, isPopular, category fields.
+- Updated restaurantApi with getBySlug and getDishById methods.
+- Created useRestaurant and useRestaurantDishes hooks with React Query (5min stale time).
+- Created restaurant detail page at `src/app/(main)/restaurants/[id]/page.tsx` with back button, restaurant info, delivery links (GrabFood/ShopeeFood), and menu section.
+- Added analytics tracking for dish clicks.
+- Validation passed: `npm run type-check`, `npm run lint`, `npm run build`.
+- Note: lint/build still show a non-blocking Next.js warning about `<img>` usage.
+
 ### 8.1 Restaurant Components
-- [ ] Tạo `RestaurantCard` component
-- [ ] Tạo `RestaurantDetail` component
-- [ ] Tạo `DishList` component
-- [ ] Tạo `DishCard` component
+- [x] Tạo `RestaurantCard` component
+- [x] Tạo `RestaurantDetail` component
+- [x] Tạo `DishList` component
+- [x] Tạo `DishCard` component
 
 ### 8.2 Restaurant Pages
-- [ ] Tạo `src/app/(main)/restaurants/[id]/page.tsx`
-- [ ] Implement restaurant info
-- [ ] Implement menu preview
-- [ ] Implement delivery links
+- [x] Tạo `src/app/(main)/restaurants/[id]/page.tsx`
+- [x] Implement restaurant info
+- [x] Implement menu preview
+- [x] Implement delivery links
 - [ ] Implement reviews (optional for MVP)
 
 ---

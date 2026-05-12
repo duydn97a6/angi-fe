@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { MapPin, Star, Bike } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { formatPrice, formatDistance } from '@/lib/utils/format';
@@ -16,11 +17,12 @@ export function RestaurantCard({ restaurant, onClick }: RestaurantCardProps) {
     <motion.div whileTap={onClick ? { scale: 0.98 } : undefined} transition={{ duration: 0.1 }}>
       <Card interactive={!!onClick} onClick={onClick} className="flex items-start gap-3">
         {restaurant.imageUrl && (
-          <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-md bg-gray-100">
-            <img
+          <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-md bg-gray-100">
+            <Image
               src={restaurant.imageUrl}
               alt={restaurant.name}
-              className="h-full w-full object-cover"
+              fill
+              className="object-cover"
             />
           </div>
         )}

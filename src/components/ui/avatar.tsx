@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { cn } from '@/lib/utils/cn';
 
 interface AvatarProps {
@@ -12,6 +13,13 @@ const sizeClasses = {
   md: 'h-9 w-9 text-sm',
   lg: 'h-11 w-11 text-base',
   xl: 'h-16 w-16 text-xl',
+};
+
+const sizePixels = {
+  sm: 28,
+  md: 36,
+  lg: 44,
+  xl: 64,
 };
 
 const colors = [
@@ -33,9 +41,11 @@ export function Avatar({ name, src, size = 'md', className }: AvatarProps) {
 
   if (src) {
     return (
-      <img
+      <Image
         src={src}
         alt={name}
+        width={sizePixels[size]}
+        height={sizePixels[size]}
         className={cn('rounded-full object-cover', sizeClasses[size], className)}
       />
     );

@@ -1,6 +1,7 @@
 'use client';
 
 import { ExternalLink, MapPin, Star, Phone, Clock, Bike } from 'lucide-react';
+import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -20,10 +21,12 @@ export function RestaurantDetail({ restaurant, onBack }: RestaurantDetailProps) 
       {/* Hero image */}
       {restaurant.imageUrl ? (
         <div className="relative h-48 w-full overflow-hidden rounded-lg bg-gray-100 md:h-56">
-          <img
+          <Image
             src={restaurant.imageUrl}
             alt={restaurant.name}
-            className="h-full w-full object-cover"
+            fill
+            className="object-cover"
+            priority
           />
         </div>
       ) : (

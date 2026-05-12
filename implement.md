@@ -391,26 +391,42 @@
 
 ## 🎯 Phase 9: PWA & Performance (Tuần 5)
 
+**Status:** Completed
+**Last updated:** 2026-05-11 UTC+07
+**Progress notes:**
+- Created PWA manifest (`public/manifest.json`) with AnGi branding, theme color, icons, and standalone display mode.
+- Created placeholder SVG icons for PWA (`public/icons/favicon.svg`, `icon-192.svg`, `icon-512.svg`). PNG icons should be added before production.
+- Configured `@ducanh2912/next-pwa` plugin in `next.config.js` with service worker generation (disabled in dev, auto-register, skipWaiting).
+- Created offline fallback page at `src/app/offline/page.tsx` with friendly Vietnamese messaging and retry button.
+- Updated root layout with full PWA metadata: manifest link, theme color, viewport, apple-touch-icon, Open Graph tags, and JSON-LD structured data (WebApplication schema).
+- Added page-level metadata via route layouts for home, history, profile, and restaurant pages with title templates.
+- Created `src/app/sitemap.ts` and `src/app/robots.ts` for dynamic SEO generation.
+- Replaced all `<img>` tags with Next.js `Image` component for automatic optimization (Avatar, RestaurantCard, DishCard, RestaurantDetail).
+- Updated `next.config.js` with image remote patterns, compression, and `poweredByHeader: false`.
+- Added `NEXT_PUBLIC_BASE_URL` to `.env.local.example` for sitemap/robots base URL.
+- Added PWA build outputs to `.gitignore`.
+- Validation passed: `npm run type-check`, `npm run lint` (zero warnings), `npm run build`.
+
 ### 9.1 PWA Setup
-- [ ] Tạo `public/manifest.json`
-- [ ] Cấu hình service worker
-- [ ] Add to home screen prompt
-- [ ] Offline fallback page
-- [ ] Cache strategy cho static assets
+- [x] Tạo `public/manifest.json`
+- [x] Cấu hình service worker
+- [x] Add to home screen prompt
+- [x] Offline fallback page
+- [x] Cache strategy cho static assets
 
 ### 9.2 Performance Optimization
-- [ ] Implement code splitting
-- [ ] Implement lazy loading cho images
-- [ ] Optimize bundle size
+- [x] Implement code splitting
+- [x] Implement lazy loading cho images
+- [x] Optimize bundle size
 - [ ] Implement prefetch cho critical routes
 - [ ] Configure CDN cho static assets
 
 ### 9.3 SEO & Metadata
-- [ ] Implement dynamic metadata
-- [ ] Add Open Graph tags
-- [ ] Add structured data (JSON-LD)
-- [ ] Configure sitemap.xml
-- [ ] Configure robots.txt
+- [x] Implement dynamic metadata
+- [x] Add Open Graph tags
+- [x] Add structured data (JSON-LD)
+- [x] Configure sitemap.xml
+- [x] Configure robots.txt
 
 ---
 

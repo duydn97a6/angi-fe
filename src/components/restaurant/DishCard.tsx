@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { Flame } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { formatPrice } from '@/lib/utils/format';
@@ -20,11 +21,12 @@ export function DishCard({ dish, onClick }: DishCardProps) {
         className="flex w-full items-start gap-3 rounded-lg border border-gray-100 bg-white p-3 text-left transition-all hover:border-gray-200 hover:shadow-sm"
       >
         {dish.imageUrl && (
-          <div className="h-14 w-14 flex-shrink-0 overflow-hidden rounded-md bg-gray-100">
-            <img
+          <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-md bg-gray-100">
+            <Image
               src={dish.imageUrl}
               alt={dish.name}
-              className="h-full w-full object-cover"
+              fill
+              className="object-cover"
             />
           </div>
         )}

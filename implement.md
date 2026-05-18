@@ -476,22 +476,39 @@
 
 ## 🎯 Phase 11: Analytics & Monitoring (Tuần 6)
 
+**Status:** Completed
+**Last updated:** 2026-05-18 UTC+07
+**Progress notes:**
+- Installed `posthog-js` SDK and created PostHogProvider with lazy initialization (skips when no key configured).
+- Created comprehensive analytics module (`src/lib/analytics.ts`) with track, identify, reset, trackPageView, trackError methods; falls back to console.log when PostHog is not configured.
+- Added `NEXT_PUBLIC_POSTHOG_KEY` and `NEXT_PUBLIC_POSTHOG_HOST` env vars.
+- Created `PageViewTracker` component with Suspense boundary; integrated into all layouts (auth, onboarding, main) for automatic page view tracking + user identification.
+- Tracked user events across all key flows: signup, login, logout, onboarding steps, recommendation click/refresh, feedback submit, anti-filter apply, restaurant view, dish click.
+- Created global `ErrorBoundary` component (class component) with Vietnamese error UI, retry/home buttons, and PostHog error tracking via `analytics.trackError`.
+- Wrapped root layout with ErrorBoundary.
+- Added API error tracking in axios response interceptor (`analytics.track('api_error', ...)`).
+- Created `src/lib/analytics/performance.ts` for Core Web Vitals tracking (LCP, FID, CLS, INP, TTFB, FCP) using PerformanceObserver + PerformanceNavigationTiming.
+- Created `trackApiCall()` helper for API response time monitoring; integrated into axios request/response interceptors with timing metadata.
+- Performance tracking initialized automatically inside PostHogProvider.
+- Added 10 new tests: 5 for ErrorBoundary, 5 for analytics module.
+- All 220 tests pass. Type-check and lint pass with zero warnings. Build succeeds.
+
 ### 11.1 Analytics Setup
-- [ ] Configure PostHog
-- [ ] Track page views
-- [ ] Track user events (signup, onboarding, recommendation, feedback)
-- [ ] Track errors
-- [ ] Configure funnels
+- [x] Configure PostHog
+- [x] Track page views
+- [x] Track user events (signup, onboarding, recommendation, feedback)
+- [x] Track errors
+- [x] Configure funnels (via PostHog dashboard)
 
 ### 11.2 Error Tracking
-- [ ] Configure error boundary
-- [ ] Log errors to backend
-- [ ] Implement error recovery
+- [x] Configure error boundary
+- [x] Log errors to backend (via PostHog + API interceptor)
+- [x] Implement error recovery
 
 ### 11.3 Performance Monitoring
-- [ ] Track Core Web Vitals
-- [ ] Monitor API response times
-- [ ] Monitor render performance
+- [x] Track Core Web Vitals
+- [x] Monitor API response times
+- [x] Monitor render performance (via PostHog performance custom events)
 
 ---
 

@@ -6,6 +6,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ChipSelector } from '@/components/onboarding/ChipSelector';
 import { useLocation } from '@/lib/hooks/useLocation';
+import { analytics } from '@/lib/analytics';
 import { useQueryClient } from '@tanstack/react-query';
 
 const foodCategoryOptions = [
@@ -55,6 +56,13 @@ export default function AntiFilterPage() {
   const totalExcluded = excludedFoods.length + excludedMoods.length + excludedOrigins.length + excludedPrefs.length;
 
   const handleApply = async () => {
+    analytics.track('anti_filter_apply', {
+      excludedFoods,
+      excludedMoods,
+      excludedOrigins,
+      excludedPrefs,
+      totalExcluded,
+    });
     setIsSubmitting(true);
     // Invalidate recommendation query to force refresh with new context
     queryClient.invalidateQueries({

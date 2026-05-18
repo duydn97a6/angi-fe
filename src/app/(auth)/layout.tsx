@@ -1,4 +1,5 @@
 import { Mascot } from '@/components/shared/Mascot';
+import { PageViewTracker } from '@/components/shared/PageViewTracker';
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -13,6 +14,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         </div>
         {children}
       </div>
+      <PageViewTracker />
     </main>
   );
 }

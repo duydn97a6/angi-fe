@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { authApi } from '@/lib/api/auth';
+import { analytics } from '@/lib/analytics';
 import { useAuthStore } from '@/lib/stores/authStore';
 import { loginSchema, type LoginFormValues } from '@/lib/utils/validation';
 
@@ -37,6 +38,7 @@ function LoginContent() {
         toast.error('Backend không trả về token hợp lệ');
         return;
       }
+      analytics.track('login', { method: 'email' });
       toast.success('Đăng nhập thành công');
       router.push(data.user?.isOnboarded ? next : '/onboarding');
     },

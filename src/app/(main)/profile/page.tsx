@@ -4,10 +4,17 @@ import Link from 'next/link';
 import { ChevronRight, Settings, MapPin, Users, Shield, Share2, Info, LogOut, Bell } from 'lucide-react';
 import { Avatar } from '@/components/ui/avatar';
 import { useAuth } from '@/lib/hooks/useAuth';
+import { analytics } from '@/lib/analytics';
 import { useMealStats } from '@/lib/hooks/useMealHistory';
 
 export default function ProfilePage() {
   const { user, logout } = useAuth();
+
+  const handleLogout = () => {
+    analytics.track('logout');
+    analytics.reset();
+    logout();
+  };
   const { data: stats } = useMealStats({ period: 'all' });
 
   if (!user) return null;
@@ -56,7 +63,7 @@ export default function ProfilePage() {
           <MenuItem href="/about" icon={Info} label="Về AnGi" />
           <button
             type="button"
-            onClick={logout}
+            onClick={handleLogout}
             className="flex w-full items-center gap-3 p-4 text-red-600 hover:bg-red-50"
           >
             <LogOut className="h-4 w-4" />

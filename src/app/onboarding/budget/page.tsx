@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { OptionCard } from '@/components/onboarding/OptionCard';
 import { StepLayout } from '@/components/onboarding/StepLayout';
 import { useOnboardingStore } from '@/lib/stores/onboardingStore';
+import { analytics } from '@/lib/analytics';
 
 const budgetOptions = [
   { min: 30000, max: 50000, title: 'Tiết kiệm', description: '30.000đ - 50.000đ' },
@@ -25,6 +26,7 @@ export default function BudgetPage() {
     const option = budgetOptions.find((item) => `${item.min}-${item.max}` === selected);
     if (!option) return;
     setBudget(option.min, option.max);
+    analytics.track('onboarding_step', { step: 'budget', min: option.min, max: option.max });
     router.push('/onboarding/finish');
   };
 

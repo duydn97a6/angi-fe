@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { authApi } from '@/lib/api/auth';
+import { analytics } from '@/lib/analytics';
 import { useAuthStore } from '@/lib/stores/authStore';
 import { registerSchema, type RegisterFormValues } from '@/lib/utils/validation';
 
@@ -34,6 +35,7 @@ export default function RegisterPage() {
         toast.error('Backend không trả về token hợp lệ');
         return;
       }
+      analytics.track('signup', { method: 'email' });
       toast.success('Đăng ký thành công');
       router.push('/onboarding');
     },

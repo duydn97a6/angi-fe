@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { userApi } from '@/lib/api/user';
+import { analytics } from '@/lib/analytics';
 import { useAuthStore } from '@/lib/stores/authStore';
 import { useOnboardingStore } from '@/lib/stores/onboardingStore';
 
@@ -19,6 +20,7 @@ export default function FinishPage() {
   const completeMutation = useMutation({
     mutationFn: userApi.completeOnboarding,
     onSuccess: () => {
+      analytics.track('onboarding_complete', { preferences: getPayload() });
       if (user) {
         setUser({ ...user, isOnboarded: true, preferences: getPayload() });
       }

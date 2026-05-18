@@ -17,6 +17,8 @@ export default function RestaurantPage() {
   const { data: restaurant, isLoading: restaurantLoading, error: restaurantError, refetch } = useRestaurant(id);
   const { data: dishes, isLoading: dishesLoading, error: dishesError, refetch: refetchDishes } = useRestaurantDishes(id);
 
+  analytics.track('restaurant_view', { restaurantId: id });
+
   const handleDishClick = (dish: Dish) => {
     analytics.track('dish_click', {
       restaurantId: id,

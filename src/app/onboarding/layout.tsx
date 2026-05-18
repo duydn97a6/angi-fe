@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import { ProgressBar } from '@/components/onboarding/ProgressBar';
+import { PageViewTracker } from '@/components/shared/PageViewTracker';
 
 const steps = ['region', 'location', 'diet', 'budget', 'finish'];
 
@@ -19,6 +20,7 @@ export default function OnboardingLayout({ children }: { children: React.ReactNo
         )}
         {children}
       </div>
+      <PageViewTracker />
     </div>
   );
 }

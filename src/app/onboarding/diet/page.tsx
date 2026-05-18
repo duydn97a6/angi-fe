@@ -7,6 +7,7 @@ import { StepLayout } from '@/components/onboarding/StepLayout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useOnboardingStore } from '@/lib/stores/onboardingStore';
+import { analytics } from '@/lib/analytics';
 
 const foodOptions = [
   { value: 'seafood', label: 'Hải sản' },
@@ -44,6 +45,7 @@ export default function DietPage() {
   const handleNext = () => {
     setExcludedFoods(excluded);
     setDietType(selectedDiet[0] as 'normal' | 'vegetarian' | 'vegan' | 'healthy');
+    analytics.track('onboarding_step', { step: 'diet', excludedFoods: excluded.length, dietType: selectedDiet[0] });
     router.push('/onboarding/budget');
   };
 

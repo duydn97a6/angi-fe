@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { StepLayout } from '@/components/onboarding/StepLayout';
 import { Input } from '@/components/ui/input';
 import { useOnboardingStore } from '@/lib/stores/onboardingStore';
+import { analytics } from '@/lib/analytics';
 import { cn } from '@/lib/utils/cn';
 
 const radiusOptions = [500, 1000, 2000];
@@ -26,6 +27,7 @@ export default function LocationPage() {
       address: address.trim(),
       radius,
     });
+    analytics.track('onboarding_step', { step: 'location', radius });
     router.push('/onboarding/diet');
   };
 

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { OptionCard } from '@/components/onboarding/OptionCard';
 import { StepLayout } from '@/components/onboarding/StepLayout';
 import { useOnboardingStore } from '@/lib/stores/onboardingStore';
+import { analytics } from '@/lib/analytics';
 
 const options = [
   { value: 'north', title: 'Miền Bắc', description: 'Phở, bún chả, bún đậu...' },
@@ -20,6 +21,7 @@ export default function RegionPage() {
   const handleNext = () => {
     if (!selected) return;
     setRegion(selected);
+    analytics.track('onboarding_step', { step: 'region', value: selected });
     router.push('/onboarding/location');
   };
 

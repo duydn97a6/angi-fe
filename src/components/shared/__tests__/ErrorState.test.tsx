@@ -6,7 +6,7 @@ import { ErrorState } from '../ErrorState';
 describe('ErrorState', () => {
   it('renders default error message', () => {
     render(<ErrorState />);
-    expect(screen.getByText(/Ối/i)).toBeInTheDocument();
+    expect(screen.getByText(/lỗi/i)).toBeInTheDocument();
   });
 
   it('renders custom title and description', () => {

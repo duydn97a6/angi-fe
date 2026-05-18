@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { ChevronRight, Settings, MapPin, Users, Shield, Share2, Info, LogOut, Bell } from 'lucide-react';
 import { Avatar } from '@/components/ui/avatar';
+import { Skeleton } from '@/components/ui/skeleton';
 import { useAuth } from '@/lib/hooks/useAuth';
 import { analytics } from '@/lib/analytics';
 import { useMealStats } from '@/lib/hooks/useMealHistory';
@@ -15,9 +16,23 @@ export default function ProfilePage() {
     analytics.reset();
     logout();
   };
-  const { data: stats } = useMealStats({ period: 'all' });
+  const { data: stats, isLoading: statsLoading } = useMealStats({ period: 'all' });
 
-  if (!user) return null;
+  if (!user) {
+    return (
+      <div className="px-4 py-4 md:px-8 md:py-6">
+        <div className="mx-auto max-w-2xl">
+          <div className="mb-6 flex flex-col items-center">
+            <Skeleton className="h-16 w-16 rounded-full" />
+            <Skeleton className="mt-3 h-6 w-32" />
+            <Skeleton className="mt-1 h-4 w-40" />
+          </div>
+          <Skeleton className="mb-6 h-28 rounded-lg" />
+          <Skeleton className="h-64 rounded-lg" />
+        </div>
+      </div>
+    );
+  }
 
   const aiPercent = Math.min(
     100,
@@ -27,7 +42,7 @@ export default function ProfilePage() {
   const favoriteCount = stats?.topDishes?.length ?? 0;
 
   return (
-    <div className="px-4 py-4 md:px-8 md:py-6">
+    <div className="px-4 py-4 md:px-8 md:py-6 page-enter">
       <div className="mx-auto max-w-2xl">
         {/* User info */}
         <div className="mb-6 flex flex-col items-center">
@@ -48,7 +63,7 @@ export default function ProfilePage() {
             />
           </div>
           <p className="mt-2 text-caption text-coral-600">
-            {totalMeals} bữa ăn • {favoriteCount} món yêu thích
+            {statsLoading ? <Skeleton className="inline-block h-3 w-24" /> : `${totalMeals} bữa ăn • ${favoriteCount} món yêu thích`}
           </p>
         </div>
 
@@ -79,13 +94,13 @@ function MenuItem({ href, icon: Icon, label }: { href: string; icon: React.Eleme
   return (
     <Link
       href={href}
-      className="flex items-center justify-between border-b border-gray-100 p-4 last:border-b-0 hover:bg-gray-50"
+      className="flex items-center justify-between border-b border-gray-100 p-4 transition-colors duration-150 last:border-b-0 hover:bg-gray-50"
     >
       <div className="flex items-center gap-3">
-        <Icon className="h-4 w-4 text-gray-500" />
+        <Icon className="h-4 w-4 text-gray-500" aria-hidden="true" />
         <span className="text-body-sm">{label}</span>
       </div>
-      <ChevronRight className="h-4 w-4 text-gray-400" />
+      <ChevronRight className="h-4 w-4 text-gray-400" aria-hidden="true" />
     </Link>
   );
 }

@@ -7,8 +7,11 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
   return (
     <AuthGuard>
       <div className="min-h-screen bg-white pb-14 md:pb-0">
+        <a href="#main-content" className="skip-nav">
+          Skip to content
+        </a>
         <Header />
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
         <BottomNav />
         <PageViewTracker />
       </div>

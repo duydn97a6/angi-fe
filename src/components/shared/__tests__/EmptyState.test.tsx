@@ -14,13 +14,13 @@ describe('EmptyState', () => {
     expect(screen.getByText('Thử tìm kiếm khác')).toBeInTheDocument();
   });
 
-  it('renders default emoji icon', () => {
+  it('renders default mascot icon', () => {
     render(<EmptyState title="Trống" />);
-    expect(screen.getByText('🍜')).toBeInTheDocument();
+    expect(screen.getByText('🤔')).toBeInTheDocument();
   });
 
   it('renders custom icon', () => {
-    render(<EmptyState title="Trống" icon="📍" />);
+    render(<EmptyState title="Trống" icon={<span>📍</span>} />);
     expect(screen.getByText('📍')).toBeInTheDocument();
   });
 

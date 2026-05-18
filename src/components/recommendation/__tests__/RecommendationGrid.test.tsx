@@ -21,7 +21,7 @@ const mockRecommendation: RecommendationItem = {
 describe('RecommendationGrid', () => {
   it('shows loading state with skeletons', () => {
     const { container } = render(<RecommendationGrid recommendations={[]} isLoading onCardClick={() => {}} />);
-    const skeletons = container.querySelectorAll('.animate-pulse');
+    const skeletons = container.querySelectorAll('.skeleton-shimmer');
     expect(skeletons.length).toBeGreaterThanOrEqual(3);
   });
 

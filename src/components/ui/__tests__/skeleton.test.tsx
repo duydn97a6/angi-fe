@@ -1,16 +1,16 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { Skeleton } from '../skeleton';
 
 describe('Skeleton', () => {
-  it('renders with animate-pulse class', () => {
+  it('renders with skeleton-shimmer class', () => {
     const { container } = render(<Skeleton />);
-    expect(container.firstChild).toHaveClass('animate-pulse');
+    expect(container.firstChild).toHaveClass('skeleton-shimmer');
   });
 
-  it('renders with bg-gray-100 class', () => {
+  it('renders with rounded-md class', () => {
     const { container } = render(<Skeleton />);
-    expect(container.firstChild).toHaveClass('bg-gray-100');
+    expect(container.firstChild).toHaveClass('rounded-md');
   });
 
   it('applies custom className', () => {
